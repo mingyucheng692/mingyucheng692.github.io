@@ -1,0 +1,14 @@
+{{ if .Page.Store.Get "hasMermaid" }}
+<div class="mermaid">
+  {{ .Inner }}
+</div>
+{{ else }}
+<script type="module">
+    import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>
+<div class="mermaid">
+  {{ .Inner }}
+</div>
+{{ .Page.Store.Set "hasMermaid" true }}
+{{ end }}

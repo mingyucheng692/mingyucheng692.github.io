@@ -1,0 +1,30 @@
+<div class="social-icons" {{ with .align}}align="{{.}}" {{- end }}>
+    <script>
+        (function() {
+            window._hw = false; // Human Witness
+            const onUserAction = () => { window._hw = true; };
+            ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(evt => 
+                window.addEventListener(evt, onUserAction, {once: true, passive: true})
+            );
+        })();
+    </script>
+    {{- range site.Params.socialIcons }}
+    {{- if eq .name "email" }}
+    <!-- Email Obfuscation: XOR Encrypted + Base64 + Interaction Check -->
+    <!-- The href is a dummy to confuse crawlers. The real action happens on click. -->
+    <a href="https://intent.me/404-bot-trap" 
+       data-src="IRoAFR1OZkEZBAcYZwkbCgkYLEAXCgNbJA8dCUFLPwcRElMXJEgSFlNFbxobWAMdJwkNEA0cLAATU1dGCQkZBAcYZw0bCA==" 
+       data-ref="Intent"
+       onclick="if(!window._hw)return true;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;return true;"
+       target="_blank" rel="noopener noreferrer me"
+       title="{{ (.title | default .name) | title }}">
+        {{ partial "svg.html" . }}
+    </a>
+    {{- else }}
+    <a href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+        title="{{ (.title | default .name) | title }}">
+        {{ partial "svg.html" . }}
+    </a>
+    {{- end }}
+    {{- end }}
+</div>

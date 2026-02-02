@@ -1,5 +1,4 @@
 baseURL: "https://intent.me/"
-languageCode: "en-us"
 title: "Intent"
 theme: "PaperMod"
 
@@ -8,127 +7,108 @@ buildDrafts: false
 buildFuture: false
 buildExpired: false
 
-googleAnalytics: ""
+# Multilingual Configuration
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    title: "Intent"
+    params:
+      profileMode:
+        enabled: true
+        title: "Intent"
+        subtitle: "Embedded Systems | Golang | Power Systems"
+        imageUrl: "https://github.com/mingyucheng692.png"
+        imageWidth: 120
+        imageHeight: 120
+        buttons:
+          - name: "Tech Blog"
+            url: "posts"
+          - name: "Github"
+            url: "https://github.com/mingyucheng692"
+    menu:
+      main:
+        - identifier: archives
+          name: "Archives"
+          url: "/archives/"
+          weight: 10
+        - identifier: search
+          name: "Search"
+          url: "/search/"
+          weight: 20
+  zh:
+    languageName: "中文"
+    weight: 2
+    title: "Intent"
+    params:
+      profileMode:
+        enabled: true
+        title: "Intent"
+        subtitle: "嵌入式系统 | Golang | 电力系统"
+        imageUrl: "https://github.com/mingyucheng692.png"
+        imageWidth: 120
+        imageHeight: 120
+        buttons:
+          - name: "技术博客"
+            url: "posts"
+          - name: "Github"
+            url: "https://github.com/mingyucheng692"
+    menu:
+      main:
+        - identifier: archives
+          name: "归档"
+          url: "/archives/"
+          weight: 10
+        - identifier: search
+          name: "搜索"
+          url: "/search/"
+          weight: 20
 
 minify:
   disableXML: true
   minifyOutput: true
 
 params:
-  env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Intent
-  description: "A technical blog focusing on Embedded Systems, Golang, and Power Systems (EMS/PCS/BMS)."
-  keywords: [Blog, Portfolio, PaperMod, Golang, Embedded, IoT]
-  author: Me
-  # author: ["Me", "You"] # multiple authors
-  images: ["<link or path of image for opengraph, twitter-cards>"]
-  DateFormat: "January 2, 2006"
-  defaultTheme: auto # dark, light
+  env: production
+  description: "Focusing on Embedded Systems, Golang, and Power Systems (EMS/PCS/BMS)."
+  author: "Mingyu Cheng"
+  DateFormat: "2006-01-02"
+  defaultTheme: auto
   disableThemeToggle: false
-
   ShowReadingTime: true
   ShowShareButtons: true
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowWordCount: true
-  ShowRssButtonInSectionTermList: true
   UseHugoToc: true
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: false
-  tocopen: false
-
+  
+  # Assets
   assets:
-    # disableHLJS: true # to disable highlight.js
-    # disableFingerprinting: true
-    favicon: "<link / abs url>"
-    favicon16x16: "<link / abs url>"
-    favicon32x32: "<link / abs url>"
-    apple_touch_icon: "<link / abs url>"
-    safari_pinned_tab: "<link / abs url>"
+    favicon: "/favicon.ico"
 
-  label:
-    text: "Intent"
-    icon: /apple-touch-icon.png
-    iconHeight: 35
-
-  # profile-mode
-  profileMode:
-    enabled: true # needs to be explicitly set
-    title: Intent
-    subtitle: "Software Engineer | Embedded & Golang | EMS/PCS/BMS"
-    imageUrl: "<link or path of image for opengraph, twitter-cards>"
-    imageWidth: 120
-    imageHeight: 120
-    imageTitle: my image
-    buttons:
-      - name: Posts
-        url: posts
-      - name: Github
-        url: "https://github.com/mingyucheng692"
-
+  # Social Icons (Global)
   socialIcons:
     - name: github
       url: "https://github.com/mingyucheng692"
     - name: email
-      url: "mailto:your-email@example.com"
-    - name: linkedin
-      url: "https://linkedin.com"
+      url: "#" # Placeholder, actual link is handled via JS obfuscation in layouts/partials/social_icons.html
 
-  analytics:
-    google:
-      SiteVerificationTag: "XYZabc"
-    bing:
-      SiteVerificationTag: "XYZabc"
-    yandex:
-      SiteVerificationTag: "XYZabc"
+  # Feature Flags for extended functionalities
+  math: true    # Custom param to toggle KaTeX in templates
+  mermaid: true # Custom param to toggle Mermaid in templates
 
-  cover:
-    hidden: true # hide on all pages
-    hiddenInList: true # hide on list pages
-    hiddenInSingle: true # hide on single page
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
 
-  editPost:
-    URL: "https://github.com/mingyucheng692/mingyucheng692.github.io/content"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: true # to append file path to Edit link
-
-  # for search
-  # https://fusejs.io/api/options.html
-  fuseOpts:
-    isCaseSensitive: false
-    shouldSort: true
-    location: 0
-    distance: 1000
-    threshold: 0.4
-    minMatchCharLength: 0
-    keys: ["title", "permalink", "summary", "content"]
-menu:
-  main:
-    - identifier: categories
-      name: categories
-      url: /categories/
-      weight: 10
-    - identifier: tags
-      name: tags
-      url: /tags/
-      weight: 20
-    - identifier: example
-      name: example
-      url: /example/
-      weight: 30
-
-# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
-pygmentsUseClasses: true
 markup:
+  goldmark:
+    renderer:
+      unsafe: true # Required for Mermaid integration via raw HTML if needed
   highlight:
     noClasses: false
-    # anchorLineNos: true
-    # codeFences: true
-    # guessSyntax: true
-    # lineNos: true
-    # style: monokai
