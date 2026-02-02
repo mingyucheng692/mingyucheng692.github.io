@@ -28,8 +28,8 @@ languages:
         buttons:
           - name: "Tech Blog"
             url: "posts"
-          - name: "Github"
-            url: "https://github.com/mingyucheng692"
+          - name: "Resume"
+            url: "resume"
     menu:
       main:
         - identifier: archives
@@ -56,8 +56,8 @@ languages:
         buttons:
           - name: "技术博客"
             url: "posts"
-          - name: "Github"
-            url: "https://github.com/mingyucheng692"
+          - name: "简历"
+            url: "resume"
     menu:
       main:
         - identifier: archives
@@ -84,8 +84,8 @@ languages:
         buttons:
           - name: "技術博客"
             url: "posts"
-          - name: "Github"
-            url: "https://github.com/mingyucheng692"
+          - name: "簡歷"
+            url: "resume"
     menu:
       main:
         - identifier: archives
@@ -109,8 +109,8 @@ params:
   defaultTheme: auto
   disableThemeToggle: false
   ShowReadingTime: true
-  ShowShareButtons: true
-  ShowPostNavLinks: true
+  ShowShareButtons: false
+  ShowPostNavLinks: false
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowWordCount: true

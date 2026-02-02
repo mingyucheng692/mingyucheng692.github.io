@@ -1,0 +1,120 @@
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    line-height: var(--header-height);
+}
+
+.nav a {
+    display: block;
+}
+
+.logo,
+#menu {
+    display: flex;
+    margin: auto var(--gap);
+}
+
+.logo {
+    flex-wrap: inherit;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.logo a img, .logo a svg {
+    display: inline;
+    vertical-align: middle;
+    pointer-events: none;
+    transform: translate(0, -10%);
+    border-radius: 6px;
+    margin-inline-end: 8px;
+}
+
+button#theme-toggle {
+    font-size: 26px;
+    margin: auto 4px;
+}
+
+[data-theme="dark"] #moon {
+    display: none;
+}
+
+[data-theme="light"] #sun {
+    display: none;
+}
+
+#menu {
+    list-style: none;
+    word-break: keep-all;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+#menu li + li {
+    margin-inline-start: var(--gap);
+}
+
+#menu a {
+    font-size: 16px;
+}
+
+#menu .active {
+    font-weight: 500;
+    border-bottom: 2px solid currentColor;
+}
+
+.logo-switches {
+    display: inline-flex;
+    margin: auto 4px;
+}
+
+.logo-switches {
+    flex-wrap: inherit;
+}
+
+.lang-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: auto var(--gap);
+    align-items: center;
+}
+
+.lang-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1;
+    color: var(--secondary);
+    background: var(--code-bg);
+}
+
+.lang-tag:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.lang-tag.active {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.lang-code {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+}
+
+.lang-name {
+    font-size: 12px;
+}
