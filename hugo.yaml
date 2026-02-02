@@ -39,7 +39,7 @@ languages:
           url: "/search/"
           weight: 20
   zh:
-    languageName: "中文"
+    languageName: "简体中文"
     weight: 2
     title: "Intent"
     params:
@@ -63,6 +63,33 @@ languages:
           weight: 10
         - identifier: search
           name: "搜索"
+          url: "/search/"
+          weight: 20
+  zh-tw:
+    languageName: "繁體中文"
+    weight: 3
+    title: "Intent"
+    params:
+      profileMode:
+        enabled: true
+        title: "Intent"
+        subtitle: "嵌入式系統 | Golang | 電力系統"
+        imageUrl: "https://github.com/mingyucheng692.png"
+        imageWidth: 120
+        imageHeight: 120
+        buttons:
+          - name: "技術博客"
+            url: "posts"
+          - name: "Github"
+            url: "https://github.com/mingyucheng692"
+    menu:
+      main:
+        - identifier: archives
+          name: "歸檔"
+          url: "/archives/"
+          weight: 10
+        - identifier: search
+          name: "搜尋"
           url: "/search/"
           weight: 20
 
