@@ -25,17 +25,36 @@ languages:
         imageUrl: "https://github.com/mingyucheng692.png"
         imageWidth: 120
         imageHeight: 120
+        typeit:
+          speed: 50
+          cursorChar: "_"
+          loop: true
+          strings:
+            - "Architecting <strong>IoT Gateways</strong> with STM32 & Golang."
+            - "Deep diving into <strong>IEC-61850</strong> & Modbus protocols."
+            - "Building High-Availability <strong>Power Systems</strong>."
+            - "cat career.log | grep 'Senior Expert'"
         buttons:
-          - name: "Tech Blog"
-            url: "posts"
           - name: "Resume"
             url: "resume"
+          - name: "Project"
+            url: "projects"
+          - name: "Blog"
+            url: "posts"
     menu:
       main:
         - identifier: archives
           name: "Archives"
           url: "archives/"
           weight: 10
+        - identifier: stack
+          name: "Stack"
+          url: "stack/"
+          weight: 15
+        - identifier: tags
+          name: "Tags"
+          url: "tags/"
+          weight: 18
         - identifier: search
           name: "Search"
           url: "search/"
@@ -53,17 +72,36 @@ languages:
         imageUrl: "https://github.com/mingyucheng692.png"
         imageWidth: 120
         imageHeight: 120
+        typeit:
+          speed: 50
+          cursorChar: "_"
+          loop: true
+          strings:
+            - "Architecting <strong>IoT Gateways</strong> with STM32 & Golang."
+            - "Deep diving into <strong>IEC-61850</strong> & Modbus protocols."
+            - "Building High-Availability <strong>Power Systems</strong>."
+            - "cat career.log | grep 'Senior Expert'"
         buttons:
-          - name: "技术博客"
-            url: "posts"
           - name: "简历"
             url: "resume"
+          - name: "项目"
+            url: "projects"
+          - name: "博客"
+            url: "posts"
     menu:
       main:
         - identifier: archives
           name: "归档"
           url: "archives/"
           weight: 10
+        - identifier: stack
+          name: "技术栈"
+          url: "stack/"
+          weight: 15
+        - identifier: tags
+          name: "标签"
+          url: "tags/"
+          weight: 18
         - identifier: search
           name: "搜索"
           url: "search/"
@@ -81,17 +119,36 @@ languages:
         imageUrl: "https://github.com/mingyucheng692.png"
         imageWidth: 120
         imageHeight: 120
+        typeit:
+          speed: 50
+          cursorChar: "_"
+          loop: true
+          strings:
+            - "Architecting <strong>IoT Gateways</strong> with STM32 & Golang."
+            - "Deep diving into <strong>IEC-61850</strong> & Modbus protocols."
+            - "Building High-Availability <strong>Power Systems</strong>."
+            - "cat career.log | grep 'Senior Expert'"
         buttons:
-          - name: "技術博客"
-            url: "posts"
           - name: "簡歷"
             url: "resume"
+          - name: "專案"
+            url: "projects"
+          - name: "博客"
+            url: "posts"
     menu:
       main:
         - identifier: archives
           name: "歸檔"
           url: "archives/"
           weight: 10
+        - identifier: stack
+          name: "技術棧"
+          url: "stack/"
+          weight: 15
+        - identifier: tags
+          name: "標籤"
+          url: "tags/"
+          weight: 18
         - identifier: search
           name: "搜尋"
           url: "search/"
@@ -110,7 +167,7 @@ params:
   disableThemeToggle: false
   ShowReadingTime: true
   ShowShareButtons: false
-  ShowPostNavLinks: false
+  ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowWordCount: true
@@ -124,6 +181,8 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/mingyucheng692"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/mingyucheng692" # Placeholder URL
     - name: email
       url: "#" # Placeholder, actual link is handled via JS obfuscation in layouts/partials/social_icons.html
 

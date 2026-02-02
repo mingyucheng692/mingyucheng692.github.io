@@ -1,0 +1,66 @@
+/* Geek Button Style */
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px; /* Slightly reduced gap */
+    flex-wrap: wrap; /* Allow wrapping on very small screens, but center them */
+    max-width: 100%;
+}
+
+.button {
+    background: transparent !important;
+    border: 1px solid var(--primary) !important;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+    border-radius: 4px;
+    padding: 6px 12px; /* Compact padding */
+    transition: all 0.3s ease;
+    position: relative;
+    box-shadow: none !important;
+    margin-bottom: 5px; /* Spacing if wrapped */
+    white-space: nowrap; /* Prevent text wrapping inside button */
+}
+
+/* Add brackets around text */
+.button .button-inner::before {
+    content: "[ ";
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.button .button-inner::after {
+    content: " ]";
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.button:hover {
+    background: var(--primary) !important;
+    color: var(--theme) !important;
+    transform: translateY(-2px);
+}
+
+.button:hover .button-inner::before,
+.button:hover .button-inner::after {
+    color: var(--theme);
+}
+
+.button:active {
+    transform: translateY(0);
+}
+
+/* Social Icons Polish */
+.social-icons {
+    margin-top: 20px; /* Ensure spacing from buttons */
+}
+
+.social-icons a {
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.social-icons a:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 5px var(--primary));
+}
