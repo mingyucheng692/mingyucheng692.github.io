@@ -1,4 +1,5 @@
-baseURL: "https://intent.me/"
+baseURL: "http://localhost:4087/"
+languageCode: "en-us"
 title: "Intent"
 theme: "PaperMod"
 
@@ -12,6 +13,7 @@ defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
 languages:
   en:
+    languageCode: "en-us"
     languageName: "English"
     weight: 1
     title: "Intent"
@@ -32,13 +34,14 @@ languages:
       main:
         - identifier: archives
           name: "Archives"
-          url: "/archives/"
+          url: "archives/"
           weight: 10
         - identifier: search
           name: "Search"
-          url: "/search/"
+          url: "search/"
           weight: 20
   zh:
+    languageCode: "zh-cn"
     languageName: "简体中文"
     weight: 2
     title: "Intent"
@@ -59,13 +62,14 @@ languages:
       main:
         - identifier: archives
           name: "归档"
-          url: "/archives/"
+          url: "archives/"
           weight: 10
         - identifier: search
           name: "搜索"
-          url: "/search/"
+          url: "search/"
           weight: 20
   zh-tw:
+    languageCode: "zh-tw"
     languageName: "繁體中文"
     weight: 3
     title: "Intent"
@@ -86,11 +90,11 @@ languages:
       main:
         - identifier: archives
           name: "歸檔"
-          url: "/archives/"
+          url: "archives/"
           weight: 10
         - identifier: search
           name: "搜尋"
-          url: "/search/"
+          url: "search/"
           weight: 20
 
 minify:
