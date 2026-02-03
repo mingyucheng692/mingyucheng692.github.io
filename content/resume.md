@@ -5,7 +5,7 @@ url: "resume/"
 summary: "Resume of Mingyu Cheng"
 ---
 
-## Mingyu Cheng (Intent)
+## YUCHENG MING (Intent)
 
 **Embedded Systems | Golang | Power Systems**
 

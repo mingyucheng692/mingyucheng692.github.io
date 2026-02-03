@@ -5,7 +5,7 @@ url: "resume/"
 summary: "程明宇的簡歷"
 ---
 
-## 程明宇 (Intent)
+## 明裕成 (Intent)
 
 **嵌入式系統 | Golang | 電力系統**
 
