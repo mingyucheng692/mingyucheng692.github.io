@@ -64,3 +64,6 @@
     transform: scale(1.1);
     filter: drop-shadow(0 0 5px var(--primary));
 }
+
+/* Import Menu Icons Styles */
+@import "../common/menu-icons.css";

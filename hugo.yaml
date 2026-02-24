@@ -43,14 +43,6 @@ languages:
             url: "posts"
     menu:
       main:
-        - identifier: archives
-          name: "Archives"
-          url: "archives/"
-          weight: 10
-        - identifier: stack
-          name: "Stack"
-          url: "stack/"
-          weight: 15
         - identifier: tags
           name: "Tags"
           url: "tags/"
@@ -90,14 +82,6 @@ languages:
             url: "posts"
     menu:
       main:
-        - identifier: archives
-          name: "归档"
-          url: "archives/"
-          weight: 10
-        - identifier: stack
-          name: "技术栈"
-          url: "stack/"
-          weight: 15
         - identifier: tags
           name: "标签"
           url: "tags/"
@@ -137,14 +121,6 @@ languages:
             url: "posts"
     menu:
       main:
-        - identifier: archives
-          name: "歸檔"
-          url: "archives/"
-          weight: 10
-        - identifier: stack
-          name: "技術棧"
-          url: "stack/"
-          weight: 15
         - identifier: tags
           name: "標籤"
           url: "tags/"

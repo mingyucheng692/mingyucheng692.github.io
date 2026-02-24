@@ -1,0 +1,42 @@
+/* Menu Icon Hover Effects */
+#menu a {
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+#menu a svg {
+    transition: all 0.3s ease;
+}
+
+/* Hover color for Tags (Yellow/Orange like GitHub topics) */
+#menu a[title*="Tags"]:hover,
+#menu a[title*="标签"]:hover,
+#menu a[title*="標籤"]:hover {
+    color: #58a6ff !important; /* JavaScript Yellow as example, or GitHub topic blue #0366d6 */
+}
+
+#menu a[title*="Tags"]:hover svg,
+#menu a[title*="标签"]:hover svg,
+#menu a[title*="標籤"]:hover svg {
+    fill: rgba(241, 224, 90, 0.2);
+    transform: scale(1.1);
+}
+
+/* Hover color for Search (Blue/Cyan) */
+#menu a[title*="Search"]:hover,
+#menu a[title*="搜索"]:hover,
+#menu a[title*="搜尋"]:hover {
+    color: #58a6ff !important; /* GitHub Link Blue */
+}
+
+#menu a[title*="Search"]:hover svg,
+#menu a[title*="搜索"]:hover svg,
+#menu a[title*="搜尋"]:hover svg {
+    transform: scale(1.1) rotate(10deg);
+}
+
+/* Ensure active state color is preserved unless hovered */
+#menu .active {
+    border-bottom: 2px solid currentColor;
+}
