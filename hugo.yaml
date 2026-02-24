@@ -9,10 +9,10 @@ buildFuture: false
 buildExpired: false
 
 # Multilingual Configuration
-defaultContentLanguage: en
+defaultContentLanguage: en-us
 defaultContentLanguageInSubdir: false
 languages:
-  en:
+  en-us:
     languageCode: "en-us"
     languageName: "English"
     weight: 1
@@ -21,19 +21,10 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "Embedded Systems | Golang | Power Systems"
+        subtitle: "Embedded Systems (IIoT) | Energy Storage (ESS) | C/C++ & Go"
         imageUrl: "https://github.com/mingyucheng692.png"
         imageWidth: 120
         imageHeight: 120
-        typeit:
-          speed: 50
-          cursorChar: "_"
-          loop: true
-          strings:
-            - "Architecting <strong>IoT Gateways</strong> with STM32 & Golang."
-            - "Deep diving into <strong>IEC-61850</strong> & Modbus protocols."
-            - "Building High-Availability <strong>Power Systems</strong>."
-            - "cat career.log | grep 'Senior Expert'"
         buttons:
           - name: "Resume"
             url: "resume"
@@ -51,7 +42,7 @@ languages:
           name: "Search"
           url: "search/"
           weight: 20
-  zh:
+  zh-cn:
     languageCode: "zh-cn"
     languageName: "简体中文"
     weight: 2
@@ -60,19 +51,10 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "嵌入式系统 | Golang | 电力系统"
+        subtitle: "嵌入式系统 (IIoT) | 储能系统 (ESS) | C/C++ & Go"
         imageUrl: "https://github.com/mingyucheng692.png"
         imageWidth: 120
         imageHeight: 120
-        typeit:
-          speed: 50
-          cursorChar: "_"
-          loop: true
-          strings:
-            - "Architecting <strong>IoT Gateways</strong> with STM32 & Golang."
-            - "Deep diving into <strong>IEC-61850</strong> & Modbus protocols."
-            - "Building High-Availability <strong>Power Systems</strong>."
-            - "cat career.log | grep 'Senior Expert'"
         buttons:
           - name: "简历"
             url: "resume"
@@ -99,19 +81,10 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "嵌入式系統 | Golang | 電力系統"
+        subtitle: "嵌入式系統 (IIoT) | 儲能系統 (ESS) | C/C++ & Go"
         imageUrl: "https://github.com/mingyucheng692.png"
         imageWidth: 120
         imageHeight: 120
-        typeit:
-          speed: 50
-          cursorChar: "_"
-          loop: true
-          strings:
-            - "Architecting <strong>IoT Gateways</strong> with STM32 & Golang."
-            - "Deep diving into <strong>IEC-61850</strong> & Modbus protocols."
-            - "Building High-Availability <strong>Power Systems</strong>."
-            - "cat career.log | grep 'Senior Expert'"
         buttons:
           - name: "簡歷"
             url: "resume"
@@ -136,7 +109,7 @@ minify:
 
 params:
   env: production
-  description: "Focusing on Embedded Systems, Golang, and Power Systems (EMS/PCS/BMS)."
+  description: "Focusing on Embedded Systems, IIoT, and Power Systems (EMS/PCS/BMS)."
   author: "Mingyu Cheng"
   DateFormat: "2006-01-02"
   defaultTheme: auto

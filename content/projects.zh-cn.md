@@ -2,7 +2,6 @@
 title: "架构与项目"
 layout: "archives"
 summary: "展示我的工程项目与系统架构设计。"
-url: "/projects"
 ---
 
 ## 核心项目

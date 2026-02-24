@@ -1,7 +1,6 @@
 ---
 title: "简历"
 layout: "page"
-url: "resume/"
 summary: "程明宇的简历"
 ---
 
