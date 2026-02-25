@@ -10,7 +10,7 @@ buildExpired: false
 
 # Multilingual Configuration
 defaultContentLanguage: en-us
-defaultContentLanguageInSubdir: false
+defaultContentLanguageInSubdir: true
 languages:
   en-us:
     languageCode: "en-us"
@@ -31,7 +31,7 @@ languages:
           - name: "Project"
             url: "projects"
           - name: "Blog"
-            url: "posts"
+            url: "blog"
     menu:
       main:
         - identifier: tags
@@ -61,7 +61,7 @@ languages:
           - name: "项目"
             url: "projects"
           - name: "博客"
-            url: "posts"
+            url: "blog"
     menu:
       main:
         - identifier: tags
@@ -91,7 +91,7 @@ languages:
           - name: "專案"
             url: "projects"
           - name: "博客"
-            url: "posts"
+            url: "blog"
     menu:
       main:
         - identifier: tags
