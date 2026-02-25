@@ -2,7 +2,7 @@
 title: "Resume"
 layout: "page"
 url: "resume/"
-summary: "Resume of Mingyu Cheng"
+summary: "Resume of YUCHENG MING"
 ---
 
 ## YUCHENG MING (Intent)

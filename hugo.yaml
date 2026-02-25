@@ -110,7 +110,7 @@ minify:
 params:
   env: production
   description: "Focusing on Embedded Systems, IIoT, and Power Systems (EMS/PCS/BMS)."
-  author: "Mingyu Cheng"
+  author: "YUCHENG MING"
   DateFormat: "2006-01-02"
   defaultTheme: auto
   disableThemeToggle: false
