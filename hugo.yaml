@@ -124,7 +124,7 @@ params:
   
   # Assets
   assets:
-    favicon: "/favicon.ico"
+    favicon: "/favicon-tech.svg" # Options: /favicon-avatar.png, /favicon-letter.svg, /favicon-tech.svg, /favicon.ico
 
   # Social Icons (Global)
   socialIcons:
