@@ -1,6 +1,6 @@
 ---
 title: "Modbus-Tools 深度解析"
-date: 2024-05-20
+date: 2026-02-28T12:00:00+08:00
 tags: ["Modbus", "Qt6", "C++", "Open Source"]
 categories: ["Tech", "Project"]
 summary: "一个专为嵌入式开发人员设计的轻量级 Modbus 调试工具。支持 RTU/TCP、串口/网络调试及报文解析。"

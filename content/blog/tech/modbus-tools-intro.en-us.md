@@ -1,6 +1,6 @@
 ---
 title: "Modbus-Tools Deep Dive"
-date: 2024-05-20
+date: 2026-02-28T12:00:00+08:00
 tags: ["Modbus", "Qt6", "C++", "Open Source"]
 categories: ["Tech", "Project"]
 summary: "A lightweight Modbus debugging tool designed for embedded developers. Supports RTU/TCP, Serial/Network debugging and packet parsing."
