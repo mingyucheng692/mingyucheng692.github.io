@@ -72,6 +72,8 @@ Access-Control-Allow-Origin: https://业务域名
 
 结果是部署脚本反复重启旧镜像，形成“代码已修复、环境未生效”的假象。
 
+为从机制上杜绝该类问题，我们在生产机落地了强约束：通过 `/usr/local/bin/podman` 与 `/usr/local/bin/podman-compose` 包装脚本，检测到 `uid=0` 直接拒绝执行并退出；`which podman` 指向包装器后，即使 root 误操作也会立即失败，避免再次写入错误命名空间镜像。
+
 ---
 
 ## 根因总结

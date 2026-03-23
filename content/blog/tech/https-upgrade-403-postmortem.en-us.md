@@ -70,6 +70,8 @@ After code fix and build, production still failed. We compared image hashes via 
 
 Deployment scripts kept restarting containers from stale images, creating a false state where code was fixed but runtime never updated.
 
+To prevent this class of failure at the OS boundary, we enforced wrapper guards on `/usr/local/bin/podman` and `/usr/local/bin/podman-compose`: if `uid=0`, execution is rejected immediately. Once `which podman` resolves to the wrapper, accidental root operations fail fast instead of polluting the wrong image namespace.
+
 ---
 
 ## Root Cause Summary

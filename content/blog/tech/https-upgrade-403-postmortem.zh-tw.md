@@ -72,6 +72,8 @@ Access-Control-Allow-Origin: https://業務域名
 
 結果是部署腳本反覆重啟舊映像，形成「程式碼已修復、環境未生效」的假象。
 
+為了從機制上杜絕這類問題，我們在生產機落地強約束：以 `/usr/local/bin/podman` 與 `/usr/local/bin/podman-compose` 包裝腳本攔截 `uid=0`，一律拒絕執行。當 `which podman` 指向包裝器後，即使 root 誤操作也會立即失敗，避免再次污染錯誤命名空間的映像。
+
 ---
 
 ## 根因總結
