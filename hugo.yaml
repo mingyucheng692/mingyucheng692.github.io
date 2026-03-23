@@ -132,7 +132,7 @@ params:
     - name: github
       url: "https://github.com/mingyucheng692"
     - name: linkedin
-      url: "https://www.linkedin.com/in/mingyucheng692" # Placeholder URL
+      url: "https://www.linkedin.com/in/yu-cheng-ming-723468148/"
     - name: email
       url: "#" # Placeholder, actual link is handled via JS obfuscation in layouts/partials/social_icons.html
 
