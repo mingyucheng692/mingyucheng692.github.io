@@ -1,0 +1,108 @@
+/* Resume Minimalist Styles */
+.resume-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--primary);
+    line-height: 1.6;
+}
+
+/* Reduce heading margins to make it tighter */
+.resume-wrapper h1 {
+    font-size: 2em;
+    margin-bottom: 0.2em;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.resume-wrapper h2 {
+    font-size: 1.4em;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--tertiary); /* subtle divider */
+}
+
+.resume-wrapper h3 {
+    font-size: 1.1em;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+}
+
+/* Paragraphs and Lists */
+.resume-wrapper p {
+    margin-bottom: 0.8em;
+    color: var(--secondary);
+}
+
+.resume-wrapper ul {
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+}
+
+.resume-wrapper li {
+    margin-bottom: 0.4em;
+    color: var(--primary);
+}
+
+/* Disable the hover effects and links styles from geek-style */
+.resume-wrapper a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--tertiary);
+    transition: text-decoration-color 0.2s;
+    box-shadow: none;
+}
+
+.resume-wrapper a:hover {
+    text-decoration-color: var(--primary);
+}
+
+/* Subtitles/Dates styling */
+/* The layout uses text separated by `｜` */
+.resume-wrapper p:nth-of-type(1), 
+.resume-wrapper p:nth-of-type(2) {
+    font-size: 0.95em;
+}
+
+/* Subtitle Contact Links (Email, GitHub) */
+.resume-wrapper a.resume-contact-link {
+    color: var(--primary);
+    text-decoration: none !important;
+    border-bottom: 1px dashed var(--tertiary);
+    transition: border-bottom-color 0.2s;
+    white-space: nowrap; /* Prevent wrapping like "GitHub \n mingyucheng692" */
+}
+.resume-wrapper a.resume-contact-link:hover {
+    border-bottom-color: var(--primary);
+    border-bottom-style: solid;
+}
+
+/* Core Competencies & List Styles */
+.resume-wrapper ul {
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+.resume-wrapper ul li strong {
+    font-weight: 600;
+    color: var(--primary);
+    /* Make the category label stand out slightly without breaking minimalism */
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .resume-wrapper {
+        padding: 0 10px;
+    }
+    .resume-wrapper h1 {
+        font-size: 1.8em;
+    }
+    .resume-wrapper h2 {
+        font-size: 1.2em;
+    }
+    .resume-wrapper h3 {
+        font-size: 1.05em;
+    }
+}

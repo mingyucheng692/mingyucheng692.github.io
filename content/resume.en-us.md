@@ -1,73 +1,74 @@
 ---
 title: "Resume"
 layout: "page"
-summary: "YUCHENG MING (Intent) - Embedded Software Engineer / PC Software (ESS/EMS)"
+summary: "YUCHENG MING - Embedded / PC Software Engineer, focusing on Energy Storage Systems, Industrial Communication, and Cloud-Edge Synergy"
 ---
 
-# YUCHENG MING (Intent)
+<div class="resume-wrapper">
 
-> **Embedded Software Engineer | 3 Years Experience | Focus on IIoT & ESS**
+# YUCHENG MING
 
-- **Email**: [Hidden for Privacy]
-- **GitHub**: [mingyucheng692](https://github.com/mingyucheng692)
-- **Location**: Zhongshan, Guangdong (Open to Shenzhen)
+Embedded / PC Software Engineer ｜ 3 Years Experience ｜ Energy Storage, Industrial Comm & Cloud-Edge Synergy
 
----
+Education: Bachelor ｜ Location: Zhongshan (Intent: Guangzhou/Shenzhen) ｜ <span style="white-space: nowrap;">Email: <a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="resume-contact-link">Click to View</a></span> ｜ <span style="white-space: nowrap;">GitHub: <a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="resume-contact-link">mingyucheng692</a></span>
+<script>
+  (function() {
+      if (typeof window._hw !== 'undefined') return;
+      window._hw = false;
+      const onUserAction = () => { window._hw = true; };
+      ['mousemove', 'touchstart', 'scroll', 'keydown'].forEach(evt => 
+          window.addEventListener(evt, onUserAction, {once: true, passive: true})
+      );
+  })();
+</script>
 
-## 🛠 Skills
+## Core Competencies
 
-- **Languages**: **C/C++** (Qt6, STL, C++11/14/17), **Golang**, Python, Shell
-- **Protocols**: **Modbus (RTU/TCP)**, **MQTT**, CAN, IEC-104, IEC-61850
-- **Database/Middleware**: SQLite, PostgreSQL (TimescaleDB), Redis, Redpanda (Kafka compatible)
-- **Tools**: CMake, Docker/Podman, GDB, Git, STM32, RTOS, Windows IOCP
+- **Languages**: C / C++ ｜ Golang ｜ Python ｜ Shell
+- **Protocols**: Modbus RTU / TCP ｜ MQTT ｜ IEC-104 ｜ CAN
+- **Frameworks & Tools**: Qt6 ｜ CMake ｜ Docker ｜ Redis ｜ PostgreSQL ｜ Git
 
----
+## Work Experience
 
-## 💼 Work Experience
+### Honghui Energy (South HQ) / Guangdong Ruilai Huakong Technology Co., Ltd.
+Software Engineer ｜ 2025.06 - Present ｜ Zhongshan, Guangdong
 
-### **Honghui Energy (Southern HQ) | Guangdong Ruilai Huakong Technology Co., Ltd.**
-**Software Engineer** | 2025.06 - Present | Zhongshan, Guangdong
+- Participated in the 0-to-1 construction of Flywheel Energy Storage System software, covering FMS/PCS, edge communication gateways, and cloud platforms, forming a complete loop from device-side acquisition to platform-side O&M.
+- Continuously promoted high-frequency communication, data governance, stability diagnosis, and engineering efficiency optimization to support long-term delivery and iteration at energy storage sites.
+- Built team code specifications, modular build systems, and internal debugging tools, accumulating reusable components and reducing cross-team joint debugging costs.
 
-> **Company Background**: Beijing Honghui International Energy Technology Development Co., Ltd. is a leading enterprise in the flywheel energy storage industry. I am a core member of the Southern R&D Center team.
+## Key Projects
 
-- **Responsibilities**: Responsible for the 0-to-1 software selection and core business development of the flywheel energy storage system (covering FMS/PCS, Edge Gateway, Cloud Platform). Bridged the data link between the underlying device side and the cloud platform side, and established the team's code standards and modular build system from scratch.
-- **Team Efficiency**: Developed and maintained internal general-purpose communication debugging tools, precipitated reusable components, effectively reducing the costs of cross-department collaboration and on-site equipment commissioning.
+### Flywheel Energy Storage Monitoring System (FMS)
+Core Developer ｜ C++ / Qt6 / Modbus-TCP / SQLite / IOCP ｜ 2025.06 - Present
 
----
+- Refactored the Modbus-TCP communication link, introducing Windows IOCP and connection pools to alleviate UI blocking in high-frequency acquisition scenarios, reducing CPU usage by 15%.
+- Designed a sliding window algorithm to filter alarm signals; achieved full message storage and retrieval based on SQLite WAL, supporting second-level historical data tracing on-site.
+- Promoted CMake modular builds and exception capture mechanisms (Dump), compressing full compilation time from 5 minutes to under 50 seconds, significantly improving R&D efficiency and on-site troubleshooting speed.
 
-## 💻 Project Experience
+### Flywheel Energy Storage Edge Communication Gateway
+Core Developer ｜ C / RTOS / MQTT / Modbus RTU/TCP / IEC-104 ｜ 2025.12 - Present
 
-### **Flywheel Energy Storage Monitoring System (FMS)**
-**Role**: Core Developer (C++/Qt6) | **Period**: Honghui Energy
+- Responsible for the core business logic of the edge gateway, collecting Modbus/RS485 device data downwards and pushing time-series data via MQTT upwards, completing the cloud-edge connection layer of the energy storage system.
+- Designed data caching and breakpoint resume strategies in weak network scenarios, improving availability in fluctuating network environments on-site.
+- Implemented protocol parsing and conversion from Modbus and IEC-104 to MQTT, supporting data interconnection among devices, power protocols, and the cloud platform.
 
-- **Communication Optimization**: Introduced Windows **IOCP** asynchronous network model and connection pooling to refactor Modbus-TCP communication. Reduced CPU usage by 15% under high-frequency throughput scenarios, completely solving UI freezing issues.
-- **Data Governance**: Designed a sliding window algorithm to filter jitter signals, achieving 100% effective alarm extraction. Utilized **SQLite WAL** mode to optimize full message logging, supporting second-level historical data queries.
-- **Engineering Efficiency**: Led **CMake** modularization (precompiled headers, parallel builds), compressing full build time from >5 minutes to <50 seconds (600% efficiency increase).
-- **Stability**: Built C++ exception capture and automatic Dump generation mechanisms, combined with user authentication, significantly shortening fault localization cycles and enhancing system security.
+### Flywheel Energy Storage Smart Cloud Platform
+Backend Developer ｜ Golang / Docker / Podman / Redpanda / PostgreSQL / Redis ｜ 2025.06 - Present
 
-### **Flywheel Energy Storage Smart Cloud Platform**
-**Role**: Backend Developer (Golang/Microservices) | **Period**: Honghui Energy
+- Responsible for core backend services of the energy storage cloud platform, handling high-frequency device data access, parsing/storage, and remote O&M, achieving efficient multi-site delivery via Docker/Podman.
+- Introduced Redpanda message queue to decouple the data acquisition and storage layers, supporting stable writing in high-concurrency time-series data reporting scenarios.
+- Independently designed device and user authentication middleware, building a session governance link based on JWT AT/RT rotation and Redis, significantly enhancing platform authentication security and auditability.
 
-- **Architecture Design**: Adopted **Docker/Podman** containerization to achieve one-click service deployment and migration.
-- **High Concurrency**: Introduced **Redpanda (Kafka compatible)** message queues for peak shaving, decoupling the acquisition layer from the storage layer to ensure zero data loss under high concurrency.
-- **Security**: Designed device authentication middleware and user identity authentication systems to ensure industrial data security.
+### [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools)
+Independent Developer ｜ C++20 / Qt6 / CMake ｜ 2025.12 - Present
 
----
+- Addressed pain points in industrial field joint debugging by independently implementing Modbus RTU/TCP and general TCP/Serial debugging links; adopted a channel/transport/session/parser layered architecture, drastically reducing coupling between protocol parsing and UI.
+- Built Frame Analyzer, supporting automatic protocol recognition, engineering value conversion, register semantic annotation, JSON template reuse, and CSV export, significantly reducing on-site troubleshooting time.
+- Modularized the project based on app/core/ui/updater, perfecting multi-language switching, update checking, and log capture mechanisms to ensure efficient iteration and continuous maintenance of the tool.
 
-## 🚀 Open Source Projects
+## Education
 
-### **[Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools)**
-**Individual Developer** | 2025.12 - Present
-- **Intro**: An efficient industrial protocol debugging assistant designed to solve field commissioning pain points.
-- **Tech**: C++17, Qt6, Protocol Parser Design.
-- **Core Features**:
-  - Independently designed Modbus protocol parsing core, supporting RTU/TCP message assembly, validation, and parsing.
-  - Supports TCP Client and UART debugging modes.
-  - *Highlight*: Clear code structure, high modularity, easy for secondary development.
+Chongqing College of Foreign Trade and Business ｜ Internet of Things Engineering ｜ Bachelor of Engineering
 
----
-
-## 🎓 Education
-
-- **Chongqing College of International Business and Economics** |  B.Eng in IoT Engineering
-
+</div>
