@@ -14,7 +14,6 @@ defaultContentLanguage: en-us
 defaultContentLanguageInSubdir: true
 languages:
   en-us:
-    languageCode: "en-us"
     languageName: "English"
     weight: 1
     title: "Intent"
@@ -44,7 +43,6 @@ languages:
           url: "search/"
           weight: 20
   zh-cn:
-    languageCode: "zh-cn"
     languageName: "简体中文"
     weight: 2
     title: "Intent"
@@ -74,7 +72,6 @@ languages:
           url: "search/"
           weight: 20
   zh-tw:
-    languageCode: "zh-tw"
     languageName: "繁體中文"
     weight: 3
     title: "Intent"
@@ -109,6 +106,7 @@ minify:
   minifyOutput: true
 
 params:
+  displayFullLangName: true
   env: production
   description: "Focusing on Embedded Systems, IIoT, and Power Systems (EMS/PCS/BMS)."
   author: "YUCHENG MING"
