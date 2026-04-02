@@ -31,41 +31,43 @@ Education: Bachelor ｜ Location: Zhongshan (Intent: Guangzhou/Shenzhen) ｜ <sp
 ## Work Experience
 
 ### Honghui Energy (South HQ) / Guangdong Ruilai Huakong Technology Co., Ltd.
-Software Engineer ｜ 2025.06 - Present ｜ Zhongshan, Guangdong
+Software Engineer ｜ 2025.06 - Present ｜ Zhongshan, Guangdong  
+▸ A wholly-owned subsidiary of Honghui Energy (leading flywheel energy storage enterprise), responsible for core system development at the Southern R&D and production base
 
-- Participated in the 0-to-1 construction of Flywheel Energy Storage System software, covering FMS/PCS, edge communication gateways, and cloud platforms, forming a complete loop from device-side acquisition to platform-side O&M.
-- Continuously promoted high-frequency communication, data governance, stability diagnosis, and engineering efficiency optimization to support long-term delivery and iteration at energy storage sites.
-- Built team code specifications, modular build systems, and internal debugging tools, accumulating reusable components and reducing cross-team joint debugging costs.
+- Participated in the 0-to-1 construction of the Southern base's energy storage software ecosystem (edge-side-cloud), aligning with group technical standards; delivered software modules directly serving production line equipment testing and on-site delivery.
+- Collaborated closely with hardware and electrical protocol teams to resolve communication congestion and signal jitter issues in complex industrial environments, ensuring reliable interaction between power electronics devices and upper-layer systems.
+- Facilitated team Git collaboration and code review practices; developed multiple universal debugging toolchains to replace manual lookups with visual parsing, significantly reducing on-site troubleshooting cycles.
 
 ## Key Projects
 
 ### Flywheel Energy Storage Monitoring System (FMS)
-Core Developer ｜ C++ / Qt6 / Modbus-TCP / SQLite / IOCP ｜ 2025.06 - Present
+Core Developer ｜ C++ / Qt6 / Modbus-TCP / CAN / SQLite / IOCP ｜ 2025.06 - Present
 
-- Refactored the Modbus-TCP communication link, introducing Windows IOCP and connection pools to alleviate UI blocking in high-frequency acquisition scenarios, reducing CPU usage by 15%.
-- Designed a sliding window algorithm to filter alarm signals; achieved full message storage and retrieval based on SQLite WAL, supporting second-level historical data tracing on-site.
-- Promoted CMake modular builds and exception capture mechanisms (Dump), compressing full compilation time from 5 minutes to under 50 seconds, significantly improving R&D efficiency and on-site troubleshooting speed.
+- Refactored Modbus-TCP communication link with Windows IOCP and connection pooling, resolving UI blocking caused by high-frequency data acquisition, reducing CPU usage by ~15%.
+- Developed dedicated debugging module for DSP control boards (based on ZLG CAN SDK), implementing bidirectional dynamic parsing of IEEE 754 floating-point numbers and HEX frames, supporting multi-byte order (CDAB/ABCD) auto-conversion and register semantic mapping, replacing manual CANTest workflows and significantly improving hardware-software integration efficiency.
+- Designed sliding window algorithm for alarm signal debouncing; implemented high-frequency message persistence based on SQLite WAL mode, enabling efficient local retrieval and tracing of historical on-site data.
+- Promoted CMake modular builds and integrated Crash Dump exception capture mechanism, compressing full compilation time from 5 minutes to under 50 seconds, significantly enhancing development iteration and on-site troubleshooting efficiency.
 
 ### Flywheel Energy Storage Edge Communication Gateway
-Core Developer ｜ C / RTOS / MQTT / Modbus RTU/TCP / IEC-104 ｜ 2025.12 - Present
+Core Developer ｜ C / STM32F407 / FreeRTOS / MQTT / Modbus / IEC-104 ｜ 2025.12 - Present
 
-- Responsible for the core business logic of the edge gateway, collecting Modbus/RS485 device data downwards and pushing time-series data via MQTT upwards, completing the cloud-edge connection layer of the energy storage system.
-- Designed data caching and breakpoint resume strategies in weak network scenarios, improving availability in fluctuating network environments on-site.
-- Implemented protocol parsing and conversion from Modbus and IEC-104 to MQTT, supporting data interconnection among devices, power protocols, and the cloud platform.
+- Responsible for edge gateway core business logic based on STM32F407 and FreeRTOS, polling underlying devices via Modbus/RS485 downwards and establishing time-series data channels to the cloud via MQTT upwards.
+- Implemented protocol parsing and mapping conversion among Modbus, IEC-104, and MQTT, enabling a closed-loop data interaction across device-side, power protocol-side, and platform-side.
+- Designed and implemented time-series data caching and breakpoint resume mechanism for weak network conditions, ensuring data integrity during network fluctuations.
 
 ### Flywheel Energy Storage Smart Cloud Platform
 Backend Developer ｜ Golang / Docker / Podman / Redpanda / PostgreSQL / Redis ｜ 2025.06 - Present
 
-- Responsible for core backend services of the energy storage cloud platform, handling high-frequency device data access, parsing/storage, and remote O&M, achieving efficient multi-site delivery via Docker/Podman.
-- Introduced Redpanda message queue to decouple the data acquisition and storage layers, supporting stable writing in high-concurrency time-series data reporting scenarios.
-- Independently designed device and user authentication middleware, building a session governance link based on JWT AT/RT rotation and Redis, significantly enhancing platform authentication security and auditability.
+- Participated in core backend service development for the energy storage cloud platform (based on Alibaba Cloud Linux), handling high-frequency device data ingestion, protocol parsing, and time-series storage.
+- Led deployment environment configuration using Docker for local development and Podman rootless combined with Shell scripts for production, achieving secure isolated deployment with rootless accounts.
+- Introduced Redpanda message queue to decouple data acquisition and storage layers, smoothing concurrent write peaks; independently designed authentication middleware maintaining secure session state via JWT (AT/RT) and Redis.
 
-### [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools)
-Independent Developer ｜ C++20 / Qt6 / CMake ｜ 2025.12 - Present
+### [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools) (Personal Open Source Project)
+Independent Developer ｜ C++20 / Qt6 / CMake / CI-CD ｜ 2025.12 - Present
 
-- Addressed pain points in industrial field joint debugging by independently implementing Modbus RTU/TCP and general TCP/Serial debugging links; adopted a channel/transport/session/parser layered architecture, drastically reducing coupling between protocol parsing and UI.
-- Built Frame Analyzer, supporting automatic protocol recognition, engineering value conversion, register semantic annotation, JSON template reuse, and CSV export, significantly reducing on-site troubleshooting time.
-- Modularized the project based on app/core/ui/updater, perfecting multi-language switching, update checking, and log capture mechanisms to ensure efficient iteration and continuous maintenance of the tool.
+- Developed cross-platform debugging tool using channel/transport/session/parser layered architecture with built-in visual frame builder, eliminating tedious manual table lookups and hexadecimal frame concatenation.
+- Built Frame Analyzer core parser supporting automatic protocol recognition, custom scaling conversion, and register semantic annotation; supports JSON/CSV configuration import/export, compressing on-site troubleshooting time from minutes to seconds, improving integration efficiency by 5x+.
+- Established fully automated CI/CD pipeline via GitHub Actions for automatic build and release upon code push; client features built-in multi-language switching and Auto-Updater mechanism, ensuring agile iteration in field deployments.
 
 ## Education
 
