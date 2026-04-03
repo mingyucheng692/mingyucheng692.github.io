@@ -3,16 +3,16 @@ title: "Modbus-Tools Deep Dive: A Practical Modbus Workflow for Daily Debugging"
 date: 2026-02-28T12:00:00+08:00
 tags: ["Modbus", "Qt6", "C++", "Open Source", "Tools"]
 categories: ["Tech", "Project"]
-summary: "A practical guide to using a lightweight Modbus tool in real projects: fast frame building, log viewing and copy, plus Frame Analyzer workflows with scaling, register annotations, and persistent JSON templates."
+summary: "A practical guide to using a lightweight Modbus tool in real projects: fast frame building, log viewing and copy, plus Frame Analyzer workflows with scaling, register annotations, and persistent JSON / CSV templates."
 url: "/en-us/blog/tech/modbus-tools-intro/"
 ---
 
 ### [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools)
-**C++17 | Qt6 | Industrial Protocols**
+**C++20 | Qt6 | Industrial Protocols**
 
 In industrial and embedded development, Modbus is part of everyday work. The real challenge is not “whether Modbus works,” but how much time we spend on repetitive tasks: building frames, checking logs, and converting raw register values.
 
-Modbus-Tools was built to make those high-frequency steps smoother. Instead of being an all-in-one suite, it focuses on practical efficiency: send frames quickly, read logs clearly, and parse response data with context.
+Modbus-Tools was built to make those high-frequency steps smoother. Instead of being an all-in-one suite, it focuses on practical efficiency: send frames quickly, read logs clearly, and parse response data with context. Internally it uses a layered channel / transport / session / parser design, with CI/CD, multi-language support, and auto-update capabilities to keep iteration practical.
 
 ---
 
@@ -62,10 +62,10 @@ Set `Scale` per register (such as `0.1` or `0.01`), and the analyzer shows engin
 Add descriptions like “Phase A Voltage” or “Motor Speed” to register addresses.  
 Values and meanings appear together, so you spend less time cross-checking spreadsheets.
 
-#### Persistent config and JSON templates
+#### Persistent config and JSON / CSV templates
 Metadata can be saved and reused.
 - **Auto-save** keeps your latest scaling and descriptions.
-- **JSON import/export** lets you maintain device-specific templates and switch contexts quickly.
+- **JSON / CSV import/export** lets you maintain device-specific templates and switch contexts quickly.
 
 #### Other practical details
 - **Format Hex button**: Cleans and normalizes pasted Hex text for better readability.

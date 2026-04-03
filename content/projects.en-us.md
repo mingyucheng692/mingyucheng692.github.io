@@ -12,6 +12,6 @@ This page showcases my personal open source projects. For commercial projects I'
 
 | Project Name | Description | Tech Stack | Portal |
 | :--- | :--- | :--- | :--- |
-| **Modbus-Tools** | A lightweight Modbus debugging tool designed for embedded developers. Supports RTU/TCP, Serial/Network debugging and packet parsing. | `C++17` `Qt6` `Industrial Protocols` | [📖 Deep Dive](/en-us/blog/tech/modbus-tools-intro/)<br>[🏗 Source Code](https://github.com/mingyucheng692/Modbus-Tools) |
+| **Modbus-Tools** | A lightweight Modbus debugging tool for embedded integration work, with RTU/TCP support, visual frame building, Frame Analyzer parsing, and reusable JSON / CSV templates. | `C++20` `Qt6` `Industrial Protocols` | [📖 Deep Dive](/en-us/blog/tech/modbus-tools-intro/)<br>[🏗 Source Code](https://github.com/mingyucheng692/Modbus-Tools) |
 
 > *For more experimental projects, please visit my [GitHub Profile](https://github.com/mingyucheng692).*

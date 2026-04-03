@@ -12,6 +12,6 @@ summary: "個人開源專案與技術實踐"
 
 | 專案名稱 | 簡介 | 技術棧 | 傳送門 |
 | :--- | :--- | :--- | :--- |
-| **Modbus-Tools** | 一個專為嵌入式開發人員設計的輕量級 Modbus 調試工具。支持 RTU/TCP、串口/網絡調試及報文解析。 | `C++17` `Qt6` `Industrial Protocols` | [📖 深度解析](/zh-tw/blog/tech/modbus-tools-intro/)<br>[🏗 源碼倉庫](https://github.com/mingyucheng692/Modbus-Tools) |
+| **Modbus-Tools** | 一個面向嵌入式聯調的輕量級 Modbus 調試工具，支援 RTU/TCP、可視化發幀、Frame Analyzer 解析，以及可重用的 JSON / CSV 模板配置。 | `C++20` `Qt6` `Industrial Protocols` | [📖 深度解析](/zh-tw/blog/tech/modbus-tools-intro/)<br>[🏗 源碼倉庫](https://github.com/mingyucheng692/Modbus-Tools) |
 
 > *更多個人實驗性專案代碼請訪問我的 [GitHub 主頁](https://github.com/mingyucheng692).*
