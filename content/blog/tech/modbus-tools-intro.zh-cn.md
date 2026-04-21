@@ -28,7 +28,7 @@ url: "/zh-cn/blog/tech/modbus-tools-intro/"
 ![Modbus-TCP快速构建帧](/images/blog/modbus-tools/modbus-tcp-frame-builder.png)
 
 在调试阶段，最需要的是“快速试错”。Modbus-Tools 将参数输入与功能码操作拆分得非常清晰：
-- **一键发送常用功能码**：填好 `从机地址 (Slave ID)`、`起始地址` 和 `数量/数据`，点击 `01/02/03/04/05/06/0F/10` 等按钮即可发送。底层自动组帧并计算 CRC/LRC。功能码覆盖 FC01~FC04（读）、FC05~FC06（单写）、FC0F~FC16（多写）。
+- **一键发送常用功能码**：填好 `从机地址 (Slave ID)`、`起始地址` 和 `数量/数据`，点击 `01/02/03/04/05/06/0F/10` 等按钮即可发送。底层自动组帧并计算 CRC/LRC。功能码覆盖 0x01–0x04（读）、0x05–0x06（单写）、0x0F–0x10（多写）。
 - **HEX / DEC 智能识别**：`Slave ID` 与 `起始地址` 支持 HEX（如 `0x10`、`10H`）与 DEC（如 `16`）两种格式输入，由 `parseSmartInt()` 统一解析并做范围校验。
 - **写入数据格式可切换（HEX / DEC / Binary）**：在 `Write Data` 旁可通过 `Format` 下拉框切换 `Hex`、`Decimal` 或 `Binary`，输入习惯可以按项目场景自由调整。
 - **Raw 模式增强**：需要发送自定义 Hex 报文时，可直接切换 Raw 输入并发送，适合非标场景或异常流程验证。Raw 模式内置两个辅助按钮：

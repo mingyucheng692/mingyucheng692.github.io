@@ -28,7 +28,7 @@ url: "/zh-tw/blog/tech/modbus-tools-intro/"
 ![Modbus-TCP快速建幀](/images/blog/modbus-tools/modbus-tcp-frame-builder.png)
 
 在聯調時，最需要的是快速驗證。Modbus-Tools 將參數與功能碼拆分得清楚易用：
-- **一鍵發送常用功能碼**：填入 `從站地址 (Slave ID)`、`起始地址`、`數量/資料`，點選 `01/02/03/04/05/06/0F/10` 等按鈕即可發送。底層自動組幫並計算 CRC/LRC。功能碼涵蓋 FC01~FC04（讀）、FC05~FC06（單寫）、FC0F~FC16（多寫）。
+- **一鍵發送常用功能碼**：填入 `從站地址 (Slave ID)`、`起始地址`、`數量/資料`，點選 `01/02/03/04/05/06/0F/10` 等按鈕即可發送。底層自動組幫並計算 CRC/LRC。功能碼涵蓋 0x01–0x04（讀）、0x05–0x06（單寫）、0x0F–0x10（多寫）。
 - **HEX / DEC 智慧識別**：`Slave ID` 與 `起始地址` 支援 HEX（如 `0x10`、`10H`）與 DEC（如 `16`）兩種格式輸入，由 `parseSmartInt()` 統一解析並做範圍校驗。
 - **寫入格式可切換（HEX / DEC / Binary）**：在 `Write Data` 旁透過 `Format` 下拉選單切換 `Hex`、`Decimal` 或 `Binary`，可依專案習慣輸入。
 - **Raw 模式增強**：需要發送自定義 Hex 報文時，可直接切換 Raw 輸入並發送，適合非標流程測試。Raw 模式內建兩個輔助按鈕：

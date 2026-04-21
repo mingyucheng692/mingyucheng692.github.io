@@ -29,7 +29,7 @@ Whether you are using **Modbus RTU** (serial) or **Modbus TCP** (network), conne
 
 During debugging, the priority is rapid trial-and-error. Modbus-Tools separates parameter input from function code actions clearly:
 
-- **One-click function code actions**: Fill `Slave ID`, `Start Address`, and `Quantity/Data`, then click `01/02/03/04/05/06/0F/10` buttons to send. The underlying layer assembles frames and calculates CRC/LRC automatically. Function codes cover FC01~FC04 (read), FC05~FC06 (single write), FC0F~FC16 (multiple write).
+- **One-click function code actions**: Fill `Slave ID`, `Start Address`, and `Quantity/Data`, then click `01/02/03/04/05/06/0F/10` buttons to send. The underlying layer assembles frames and calculates CRC/LRC automatically. Function codes cover 0x01–0x04 (read), 0x05–0x06 (single write), 0x0F–0x10 (multiple write).
 - **HEX / DEC smart recognition**: `Slave ID` and `Start Address` accept both HEX (e.g., `0x10`, `10H`) and DEC (e.g., `16`) formats, parsed uniformly by `parseSmartInt()` with range validation.
 - **Writable data format switch (HEX / DEC / Binary)**: Use the `Format` selector next to `Write Data` to switch between `Hex`, `Decimal`, or `Binary` input styles.
 - **Enhanced Raw mode**: For custom Hex frames, switch to Raw input and send — suitable for non-standard scenarios or edge-case validation. Two auxiliary buttons are included:
