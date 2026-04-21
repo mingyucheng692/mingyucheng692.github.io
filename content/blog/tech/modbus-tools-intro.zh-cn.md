@@ -60,6 +60,8 @@ url: "/zh-cn/blog/tech/modbus-tools-intro/"
 
 Frame Analyzer 是日常使用频率最高的模块之一。将 Hex 报文粘贴后点击解析，即可自动拆解报文结构并输出可读表格。
 
+![构建帧 → 复制 → 粘贴解析流程](/images/blog/modbus-tools/demo.gif)
+
 ![帧解析助手主页面](/images/blog/modbus-tools/frame-analyzer-overview.png)
 
 对现场调试最有价值的，是以下几个能力：
@@ -80,7 +82,9 @@ Frame Analyzer 是日常使用频率最高的模块之一。将 Hex 报文粘贴
 切换字节序后，寄存器值会重新计算并展示。
 
 #### 寄存器功能注释 (Description)
-支持为寄存器地址添加描述（如“A 相电压”“电机转速”）。解析结果与注释并排展示，减少来回翻表的时间。
+支持为寄存器地址添加描述（如"A 相电压""电机转速"）。解析结果与注释并排展示，减少来回翻表的时间。
+
+![帧解析-地址倍率注释](/images/blog/modbus-tools/frame-analyzer-address-scale-description.png)
 
 #### 配置持久化与模板 (JSON / CSV 导入导出)
 配置可自动保持，并支持导入/导出 JSON / CSV 模板。
@@ -103,16 +107,12 @@ Frame Analyzer 是日常使用频率最高的模块之一。将 Hex 报文粘贴
 
 #### Link to Analyzer (实时联动)
 
-![Linkage & Smart Input Demo](/images/blog/modbus-tools/demo.gif)
-
 除手动粘贴 Hex 报文外，Frame Analyzer 还支持从 Traffic Monitor 接收实时数据：
 
 - **自动推送**：在 Modbus TCP / RTU 视图中开启 Linkage 开关后，RX 响应报文的 PDU 会自动送入解析器，无需手动拷贝。
 - **暂停 / 恢复**：点击 `Pause Refresh` 可驻留当前帧，方便编辑 Scale 或 Description；再次点击 `Resume Refresh` 恢复自动刷新。
 - **停止联动**：点击 `Stop Link` 断开数据流，解析器恢复为手动模式。
 - **异步执行**：解析逻辑运行于 `QThread` 后台线程，不阻塞 Traffic Monitor 的列表滚动。
-
-![帧解析地址倍率注释](/images/blog/modbus-tools/frame-analyzer-address-scale-description.png)
 
 如果你同时维护多个型号设备，按设备或项目保存独立模板后，切换调试对象时可直接导入，减少重复配置。
 

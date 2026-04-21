@@ -61,6 +61,8 @@ Troubleshooting usually starts with logs. Traffic Monitor is designed to make lo
 
 Frame Analyzer is one of the most frequently used modules. Paste a Hex frame, click parse, and get structured output with a readable table.
 
+![Build → Copy → Paste → Parse workflow](/images/blog/modbus-tools/demo.gif)
+
 ![Frame Analyzer overview](/images/blog/modbus-tools/frame-analyzer-overview.png)
 
 The following capabilities are especially useful:
@@ -85,6 +87,8 @@ Switching byte order recalculates and redisplays register values.
 Add descriptions like "Phase A Voltage" or "Motor Speed" to register addresses.  
 Values and meanings appear side by side, reducing time spent cross-checking spreadsheets.
 
+![Frame Analyzer - address scale description](/images/blog/modbus-tools/frame-analyzer-address-scale-description.png)
+
 #### Persistent config and JSON / CSV templates
 Metadata can be saved and reused.
 - **Auto-save** keeps your latest scaling and descriptions.
@@ -106,16 +110,12 @@ This mechanism is useful for analyzing frames modified by gateways/relays or inc
 
 #### Link to Analyzer (live linkage)
 
-![Linkage & Smart Input Demo](/images/blog/modbus-tools/demo.gif)
-
 In addition to manual paste, Frame Analyzer can receive live data from Traffic Monitor:
 
 - **Auto-push**: With the Linkage toggle enabled in Modbus TCP / RTU views, RX response PDUs are sent to the parser automatically — no manual copy needed.
 - **Pause / Resume**: Click `Pause Refresh` to freeze the current frame so you can edit Scale or Description; click `Resume Refresh` to resume auto-refresh.
 - **Stop linkage**: Click `Stop Link` to disconnect the data stream; the analyzer returns to manual mode.
 - **Async execution**: Parsing logic runs on a `QThread` background thread, non-blocking to Traffic Monitor list scrolling.
-
-![Frame Analyzer address scale description](/images/blog/modbus-tools/frame-analyzer-address-scale-description.png)
 
 If you maintain multiple device models, saving per-device templates and importing them when switching targets reduces repeated configuration.
 
