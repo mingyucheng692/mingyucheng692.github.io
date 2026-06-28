@@ -4,14 +4,14 @@ layout: "page"
 summary: "Open Source Projects & Technical Practice"
 ---
 
-## 🏗️ Open Source Projects
+## Open Source Projects
 
-This page showcases my personal open source projects. For commercial projects I've worked on (such as Energy Storage Monitoring Systems, Industrial Cloud Platforms, etc.), please refer to my **[Resume](/resume)**.
+This page lists public projects and technical writing around industrial communication, protocol tooling, edge connectivity, and engineering practice.
 
 ---
 
-| Project Name | Description | Tech Stack | Portal |
+| Project Name | Description | Tech Stack | Links |
 | :--- | :--- | :--- | :--- |
-| **Modbus-Tools** | A lightweight Modbus debugging tool for embedded integration work, with RTU/TCP support, visual frame building, Frame Analyzer parsing, and reusable JSON / CSV templates. | `C++20` `Qt6` `Industrial Protocols` | [📖 Deep Dive](/en-us/blog/tech/modbus-tools-intro/)<br>[🏗 Source Code](https://github.com/mingyucheng692/Modbus-Tools) |
+| **Modbus-Tools** | A lightweight Modbus debugging tool for embedded integration work, with RTU/TCP support, visual frame building, Frame Analyzer parsing, and reusable JSON / CSV templates. | `C++20` `Qt6` `Industrial Protocols` | [Article](/en-us/blog/tech/modbus-tools-intro/)<br>[Repository](https://github.com/mingyucheng692/Modbus-Tools) |
 
-> *For more experimental projects, please visit my [GitHub Profile](https://github.com/mingyucheng692).*
+> More public code and experimental work are available on [GitHub](https://github.com/mingyucheng692).

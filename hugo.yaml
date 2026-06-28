@@ -21,13 +21,13 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "Embedded Systems (IIoT) | Energy Storage (ESS) | C/C++ & Go"
-        imageUrl: "https://github.com/mingyucheng692.png"
+        subtitle: "Industrial Communication | Protocol Systems | Edge Gateway Software"
+        imageUrl: "/images/avatar-github-cat.png"
         imageWidth: 120
         imageHeight: 120
         buttons:
-          - name: "Resume"
-            url: "resume"
+          - name: "Overview"
+            url: "profile"
           - name: "Project"
             url: "projects"
           - name: "Blog"
@@ -50,13 +50,13 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "嵌入式系统 (IIoT) | 储能系统 (ESS) | C/C++ & Go"
-        imageUrl: "https://github.com/mingyucheng692.png"
+        subtitle: "工业通信 | 协议系统 | 边缘网关软件"
+        imageUrl: "/images/avatar-github-cat.png"
         imageWidth: 120
         imageHeight: 120
         buttons:
-          - name: "简历"
-            url: "resume"
+          - name: "概况"
+            url: "profile"
           - name: "项目"
             url: "projects"
           - name: "博客"
@@ -79,13 +79,13 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "嵌入式系統 (IIoT) | 儲能系統 (ESS) | C/C++ & Go"
-        imageUrl: "https://github.com/mingyucheng692.png"
+        subtitle: "工業通信 | 協議系統 | 邊緣閘道軟體"
+        imageUrl: "/images/avatar-github-cat.png"
         imageWidth: 120
         imageHeight: 120
         buttons:
-          - name: "履歷"
-            url: "resume"
+          - name: "概況"
+            url: "profile"
           - name: "專案"
             url: "projects"
           - name: "博客"
@@ -108,8 +108,8 @@ minify:
 params:
   displayFullLangName: true
   env: production
-  description: "Focusing on Embedded Systems, IIoT, and Power Systems (EMS/PCS/BMS)."
-  author: "YUCHENG MING"
+  description: "Industrial communication, protocol systems, edge gateway software, and energy digitalization."
+  author: "Intent"
   DateFormat: "2006-01-02"
   defaultTheme: auto
   disableThemeToggle: false
@@ -129,8 +129,6 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/mingyucheng692"
-    - name: linkedin
-      url: "https://www.linkedin.com/in/yu-cheng-ming-723468148/"
     - name: email
       url: "#" # Placeholder, actual link is handled via JS obfuscation in layouts/partials/social_icons.html
 

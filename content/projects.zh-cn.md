@@ -4,14 +4,14 @@ layout: "page"
 summary: "个人开源项目与技术实践"
 ---
 
-## 🏗️ 开源项目 (Open Source)
+## 开源项目
 
-这里展示了我个人开发或参与的开源项目。对于我在企业工作期间负责的商业项目（如储能监控系统、工业云平台等），请移步至 **[简历](/resume)** 查看详细介绍。
+这里展示公开项目与技术文章，内容围绕工业通信、协议工具、边缘接入与工程实践。
 
 ---
 
-| 项目名称 | 简介 | 技术栈 | 传送门 |
+| 项目名称 | 简介 | 技术栈 | 链接 |
 | :--- | :--- | :--- | :--- |
-| **Modbus-Tools** | 一个面向嵌入式联调的轻量级 Modbus 调试工具，支持 RTU/TCP、可视化发帧、Frame Analyzer 解析，以及 JSON / CSV 模板配置。 | `C++20` `Qt6` `Industrial Protocols` | [📖 深度解析](/zh-cn/blog/tech/modbus-tools-intro/)<br>[🏗 源码仓库](https://github.com/mingyucheng692/Modbus-Tools) |
+| **Modbus-Tools** | 一个面向嵌入式联调的轻量级 Modbus 调试工具，支持 RTU/TCP、可视化发帧、Frame Analyzer 解析，以及 JSON / CSV 模板配置。 | `C++20` `Qt6` `Industrial Protocols` | [文章](/zh-cn/blog/tech/modbus-tools-intro/)<br>[仓库](https://github.com/mingyucheng692/Modbus-Tools) |
 
-> *更多个人实验性项目代码请访问我的 [GitHub 主页](https://github.com/mingyucheng692).*
+> 更多公开代码与实验性项目见 [GitHub](https://github.com/mingyucheng692)。
