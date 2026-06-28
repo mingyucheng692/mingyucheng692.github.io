@@ -1,7 +1,7 @@
 ---
 title: "Overview"
 layout: "page"
-summary: "Overview of work in industrial communication, protocol systems, edge gateway software, and Linux engineering practice"
+summary: "Overview of work in industrial communication, protocol systems, edge gateway software, and Linux engineering"
 robotsNoIndex: true
 searchHidden: true
 ---
@@ -12,7 +12,7 @@ searchHidden: true
 
 Works on device connectivity, protocol conversion, edge gateway software, and industrial engineering practice.  
 Experience includes Qt desktop application development, MCU communication and application logic, and build, deployment, and maintenance in Linux environments.  
-Interests include EMS, Linux, and power protocol systems.
+Interests include Linux, industrial protocols, and systems engineering.
 
 <span style="white-space: nowrap;">Email: <a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">Click to View</a></span> ｜ <span style="white-space: nowrap;">Projects: <a href="/en-us/projects/" class="profile-contact-link">Projects</a></span> ｜ <span style="white-space: nowrap;">Blog: <a href="/en-us/blog/" class="profile-contact-link">Blog</a></span> ｜ <span style="white-space: nowrap;">GitHub: <a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
 <script>
@@ -28,7 +28,7 @@ Interests include EMS, Linux, and power protocol systems.
 
 ## Experience
 
-- **Domain**: industrial communication ｜ protocol conversion ｜ edge gateway ｜ energy software
+- **Domain**: industrial communication ｜ protocol conversion ｜ edge gateway ｜ software engineering
 - **Protocols**: Modbus RTU / TCP ｜ IEC-104 ｜ MQTT ｜ CAN
 - **Implementation**: C / C++ ｜ Linux ｜ Docker / Podman ｜ Redis / PostgreSQL
 - **Foundation**: Qt ｜ MCU / FreeRTOS ｜ on-site diagnostic tooling

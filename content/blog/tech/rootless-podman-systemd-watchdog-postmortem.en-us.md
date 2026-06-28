@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Rootless Podman + Systemd Supervision Failure Postmortem: Diagnosing and Repairing a Broken Recovery Path"
 date: 2026-04-03T20:00:00+08:00
 draft: false
@@ -19,15 +19,15 @@ This post documents the investigation and repair of a failed container recovery 
 
 ## Incident Summary
 
-- Trigger context: after the database container exited unexpectedly, the first on-site state was that the database Unit became `inactive` while the other service Units still appeared `active`
-- Observable symptoms: once the repair work began, the database service recovered to `active`, but the other services were not yet reliably handed over to systemd, which led to startup timeouts, container state drifting away from Unit state, and rate-limit lockouts on some services
+- Trigger context: after the database container exited unexpectedly, the first observed state in the runtime environment was that the database Unit became `inactive` while the other service Units still appeared `active`
+- Observable symptoms: once the repair work began, the database service recovered to `active`, but the other services were not yet reliably controlled by systemd, which led to startup timeouts, container state drifting away from Unit state, and rate-limit lockouts on some services
 - Confirmed contributing factors: the main Unit had been edited in place with `sed -i` and was later corrupted after a PowerShell escaping truncation; Compose and Systemd shared control of the runtime; generated Unit files still required post-processing; and the recovery scripts did not yet fully cover dependency cleanup and restart-failure handling
 - Fix direction: stop editing the main Unit with `sed -i`, regenerate `.service` files and patch them in Python, explicitly hand runtime control back to systemd, and add state polling plus a final health check
 - Current result: in the current environment, the recovery path now runs in a fixed order and exposes a clear diagnostic entry point on failure; readiness semantics and observability still need more work
 
 ## Symptoms and Impact
 
-The initial on-site state was not "everything went down at once." The database Unit first turned `inactive` while the other services still looked `active`. The picture became more complicated during the repair and handoff phase:
+The initial state was not "everything went down at once." The database Unit first turned `inactive` while the other services still looked `active`. The picture became more complicated during the repair and control-recovery phase:
 
 - some services showed timeout-based restart loops in `systemctl --user status`
 - some containers were already `Up` while the corresponding systemd services were still `inactive`
@@ -87,7 +87,7 @@ ExecStartPre=-/usr/bin/podman rm -f <db-service>
 EOF
 ```
 
-This at least restores a cleaner boundary: the main Unit is treated as a rebuildable artifact, while runtime switches live in Drop-ins. Based on the current scripts and subsequent field checks, we have not seen the same "main Unit damaged by in-place edits" problem recur.
+This at least restores a cleaner boundary: the main Unit is treated as a rebuildable artifact, while runtime switches live in Drop-ins. Based on the current scripts and subsequent checks, we have not seen the same "main Unit damaged by in-place edits" problem recur.
 
 ## Problem 2: Systemd Reported Failure Even Though the Container Was Already Running
 
@@ -125,7 +125,7 @@ The boundary here matters. This is not proof that `notify` is categorically unus
 
 ## Problem 3: Some Containers Were Not Actually Under Systemd Control
 
-More precisely, this dangerous state showed up during the repair process rather than in the initial incident snapshot: the database Unit had already recovered to `active`, while the other service Units still showed `inactive (dead)`.
+More precisely, this dangerous state showed up during the repair process rather than in the initial failure snapshot: the database Unit had already recovered to `active`, while the other service Units still showed `inactive (dead)`.
 
 The state on the host looked roughly like this:
 
@@ -232,7 +232,7 @@ The final startup order is therefore made explicit:
 
 - `<db-service>` -> `<redis-service>` -> `<backend-service>` -> `<frontend-service>`
 
-After all services are handed over, the script also adds one application-level health check to verify that "`active`" is at least moving closer to "externally usable." That is a compensating measure for the `Type=simple` tradeoff, not a deep readiness probe on every service startup.
+After all services are started in order, the script adds one application-level health check to verify that the application endpoint is responding, not just that the Unit is `active`. That is a compensating measure for the `Type=simple` tradeoff, not a deep readiness probe on every service startup.
 
 The wait logic after handoff looks roughly like this:
 
@@ -277,7 +277,7 @@ On the surface, the incident looked like a database failure followed by drifting
 3. the output of `podman generate systemd` was not directly runnable and still needed `Type`, `-d`, and argument patching
 4. the recovery scripts initially did not cover dependency cleanup, rate-limit recovery, and final health validation thoroughly enough
 
-This was not one flag set incorrectly. The recovery path had breaks across definition, handoff, and execution. The repair therefore was not about fixing one error line; it was about reconnecting runtime ownership, generation-time patching, and failure-time diagnostics into a single workable path.
+This was not one flag set incorrectly. The recovery path had breaks across definition, runtime ownership, and execution. The repair therefore was not about fixing one error line; it was about reconnecting runtime ownership, generation-time patching, and failure-time diagnostics into a single workable path.
 
 ---
 
@@ -286,24 +286,24 @@ This was not one flag set incorrectly. The recovery path had breaks across defin
 Combining `watchdog-enable.sh` and `deploy-all.sh`, the practical changes now in place are roughly:
 
 - the deployment script validates execution user, `HOME`, `XDG_RUNTIME_DIR`, and `DBUS_SESSION_BUS_ADDRESS` first, reducing the chance that Rootless user units fail because of an inconsistent runtime environment
-- the deployment phase still uses `podman-compose` for build and cold start, but the handoff phase explicitly stops those containers and gives ordered control back to systemd
+- the deployment phase still uses `podman-compose` for build and cold start, but the switch phase explicitly stops those containers and starts them under systemd in order
 - `watchdog-enable.sh` backs up old Units before regenerating `.service` files
 - generated `.service` files are now patched in Python in three ways: change to `Type=simple`, remove `-d`, and restore Redis empty arguments; this also avoids repeating the PowerShell escaping issue that broke the earlier `sed -i` path
 - Drop-ins now write `Restart=always`, `RestartSec`, `StartLimit*`, and service-specific `ExecStartPre`
-- after handoff to systemd, services start in the fixed order `<db-service> -> <redis-service> -> <backend-service> -> <frontend-service>` and `wait_for_service()` checks `is-active` and `is-failed`; failures and timeouts print the corresponding `journalctl`
+- after switching to systemd control, services start in the fixed order `<db-service> -> <redis-service> -> <backend-service> -> <frontend-service>` and `wait_for_service()` checks `is-active` and `is-failed`; failures and timeouts print the corresponding `journalctl`
 - before Frontend is started, the script runs `reset-failed` once to clear any leftover rate-limit lockout
-- after all services are under systemd control, the script adds one application-level health check so the system is verified beyond mere process liveness
+- after all services complete the switch, the script adds one application-level health check so verification does not rely on process liveness alone
 
-This is still an engineering solution under a specific set of constraints: single host, Rootless Podman, and user units. It solves who owns the process, how recovery is executed, and where to look when it fails. It is not a claim of generalized high availability.
+This is still an engineering solution under a specific set of constraints: single host, Rootless Podman, and user units. It solves who owns the process, how recovery is executed, and where to look when it fails. It is not a claim of generalized availability.
 
 ---
 
 ## How the Fix Is Verified
 
-- compare `podman ps` with `systemctl --user list-units` before and after handoff, confirming that we no longer leave the system in a state where containers are running but the corresponding Units are `inactive`
+- compare `podman ps` with `systemctl --user list-units` before and after the switch, confirming that we no longer leave the system in a state where containers are running but the corresponding Units are `inactive`
 - use `wait_for_service()` to poll `is-active` and `is-failed`, exposing failures during startup instead of hiding them behind fixed `sleep`
 - print the relevant `journalctl` immediately on timeout or failure so each problem maps back to a specific Unit
-- add a final application-level `/health` check after all services are handed over, so external availability is not inferred from `Type=simple` process liveness alone
+- add a final application-level `/health` check after all services complete the switch, so application status is not inferred from `Type=simple` process liveness alone
 
 A later verification pass showed that all four containers and all four user units were back in sync:
 
@@ -315,7 +315,7 @@ systemctl --user list-units 'container-*.service'
 all four corresponding Units active (running)
 ```
 
-These checks mainly cover whether systemd truly owns the process, whether failures are exposed in time, and whether the system becomes externally usable after handoff. They still do not cover finer-grained readiness signals or ongoing telemetry collection.
+These checks mainly cover whether systemd truly owns the process, whether failures are exposed in time, and whether application-level checks pass after the switch. They still do not cover finer-grained readiness signals or ongoing telemetry collection.
 
 ---
 
@@ -328,7 +328,7 @@ These checks mainly cover whether systemd truly owns the process, whether failur
 
 ---
 
-## Follow-Up Work
+## Remaining Gaps
 
 The current repair closes several known breaks in the recovery path, but some risks are still not fully covered and need follow-up:
 
@@ -336,20 +336,20 @@ The current repair closes several known breaks in the recovery path, but some ri
 - the solution still depends on `podman generate systemd` plus script-level patching; if generated output format, argument expansion, or Podman behavior changes across versions, the current patch logic can break, which is why a move to Quadlet or another declarative path still deserves separate evaluation
 - current validation remains mostly inside scripts; failure counts, exit codes, container state, and rate-limit hits are not yet collected, shipped, or alerted on, which means the broader system still lacks continuous observability and similar problems may remain reactive instead of proactively visible
 
-## Direct Improvements from This Troubleshooting Cycle
+## State After This Round
 
 - process ownership and restart responsibility are now much clearer
 - there is now an explicit standard for deciding whether generated Units are directly usable
 - the script now provides a stable entry point for where to inspect logs and where execution should stop on failure
-- the gap between "service is active" and "service is externally usable" is now covered by an application-level check
+- the gap between "service is active" and "application checks pass" is now covered by an application-level check
 
-These changes do not mean the whole setup has become a generalized HA design. They do mean the previous state, where restart configuration existed but recovery was still unreliable, has been turned into a path that is more testable, more explainable, and more repeatable.
+These changes do not mean the whole setup has become a generalized availability design. They do mean the previous state, where restart configuration existed but recovery was still unreliable, has been turned into a path that is more testable, more explainable, and more repeatable.
 
 ## Closing Note
 
 The core takeaway from this incident is simple: writing `Restart=always` in configuration does not mean the recovery path is complete. Main Unit stability, who actually starts the container, whether generated output is patched, and whether dependency and rate-limit behavior are handled in script all affect the final result.
 
-At least in this single-host Rootless Podman setup, once those breaks were repaired in script, process ownership, diagnostic entry points, and the failure-handling path all became much clearer. That does not make the solution "perfect," but it does turn recovery from something driven largely by operator intuition into a path that is easier to explain and easier to verify.
+At least in this single-host Rootless Podman setup, once those breaks were repaired in script, process ownership, diagnostic entry points, and the failure-handling path became clearer. That does not make the solution complete, but it does turn recovery from something driven largely by operator intuition into a path that is easier to explain and verify.
 
 ---
 

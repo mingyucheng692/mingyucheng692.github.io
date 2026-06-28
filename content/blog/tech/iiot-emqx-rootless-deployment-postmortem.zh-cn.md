@@ -38,7 +38,7 @@ url: "/zh-cn/blog/tech/iiot-emqx-rootless-deployment-postmortem/"
 - 放弃依赖 `emqx ctl` 的动态热加载，改为在 Entrypoint 前置阶段渲染完整 `cluster.hocon`
 - 删除不再兼容的 `resource_opts` 历史参数
 - 放通安全组 `1883`
-- 对 `/api/v1/iot/*` 路径绕过 CSRF，同时对 `/iot/ingest` 增加 `X-EMQX-Token` 常量时间校验
+- 对 `<iot-auth-prefix>` 路径绕过 CSRF，同时对 `<iot-ingest-endpoint>` 增加 `X-M2M-Token` 常量时间校验
 
 ---
 
@@ -123,8 +123,8 @@ MQTT 连接打通后，EMQX 发起的 HTTP AuthN 与 Webhook 请求又返回 `40
 
 这里的处理不是简单关掉 CSRF，而是分流：
 
-- `/api/v1/iot/*` 前缀绕过 CSRF
-- 数据接收端点 `/iot/ingest` 额外校验 `X-EMQX-Token`
+- `<iot-auth-prefix>` 前缀绕过 CSRF
+- 数据接收端点 `<iot-ingest-endpoint>` 额外校验 `X-M2M-Token`
 - Token 比对使用 `crypto/hmac.Equal`，避免时序侧信道
 
 这样处理后，Web 浏览器端仍保留原有 CSRF 防护，而 IoT M2M 链路改用更适合机器调用场景的预共享密钥校验。
@@ -175,10 +175,10 @@ CSRF 是针对浏览器上下文设计的防护模型，而 EMQX 与后端之间
 
 ### 4. 重构 M2M 安全策略
 
-对 `/api/v1/iot/*` 绕过浏览器导向的 CSRF 校验，同时在 `/iot/ingest` 上增加共享密钥校验。最终形成两套并行防护：
+对 `<iot-auth-prefix>` 绕过浏览器导向的 CSRF 校验，同时在 `<iot-ingest-endpoint>` 上增加共享密钥校验。最终形成两套并行防护：
 
 - 浏览器端：继续使用 CSRF
-- IoT M2M 端：使用 `X-EMQX-Token`
+- IoT M2M 端：使用 `X-M2M-Token`
 
 这让后端安全边界更清晰，也避免后续把浏览器流量和设备流量混用同一套校验逻辑。
 
@@ -193,8 +193,8 @@ CSRF 是针对浏览器上下文设计的防护模型，而 EMQX 与后端之间
 针对 CSRF 和 Token 中间件的测试确认：
 
 - 普通 Web/API 请求在缺失或伪造 `Origin` / `Referer` 时仍返回 `403`
-- `/api/v1/iot/*` 前缀请求可绕过 CSRF
-- `/iot/ingest` 在缺失或错误 Token 时被拒绝
+- `<iot-auth-prefix>` 前缀请求可绕过 CSRF
+- `<iot-ingest-endpoint>` 在缺失或错误 Token 时被拒绝
 
 ### 2. MQTT 端到端验证
 
@@ -203,7 +203,7 @@ CSRF 是针对浏览器上下文设计的防护模型，而 EMQX 与后端之间
 ```bash
 mosquitto_pub -d -h <Domain> -p 1883 \
   -i "<Device_SN>" -u "<Device_SN>" -P "<Token>" \
-  -t "telemetry/fms/<Device_SN>" \
+  -t "telemetry/device/<device_id>" \
   -m '{"fcs_speed_rpm": 7766, "fcs_soc": 88.9, "fms_fault_code": 0}'
 ```
 
@@ -228,7 +228,7 @@ mosquitto_pub -d -h <Domain> -p 1883 \
 - “服务已监听”不等于“外部可达”，网络连通性必须分层验证到安全组或防火墙
 - 浏览器安全机制与 M2M 安全机制应明确分流，避免互相误伤
 
-从当前阶段看，单节点模板渲染方案已经满足 MVP 验证需求，但如果继续演进到生产高可用架构，后续仍需要关注：
+从当前阶段看，单节点模板渲染方案已经满足 MVP 验证需求，但如果后续扩展到更复杂的部署形态，仍需要关注：
 
 - Broker 集群化与配置中心化
 - Webhook 异步化，避免后端被同步写流量放大

@@ -24,7 +24,7 @@ System boundary:
 
 ## Symptom and Trigger
 
-In routine security exercises for a utility-scale energy cloud platform, we ran penetration tests on the authentication path across large volumes of edge gateways and dashboard traffic, including an extreme case where an old RT was intercepted and replayed.  
+In a reproduction test around device ingress and web application authentication, we simulated an extreme case where an old RT was intercepted and replayed.  
 The previous design had AT/RT separation, but the refresh path did not fully enforce state transitions, so old RTs could still be abused in narrow concurrency windows.
 
 Desensitized event sample:
@@ -133,24 +133,24 @@ Pre-release checks now include:
 
 Audit logs use desensitized fields consistently: `user_id_masked`, `session_id`, `jti_prefix`, `ip_masked`, `ua_hash`, `risk_level`.
 
-### 3) Run Regular Replay Drills
+### 3) Validate Replay Protection Regularly
 
-A monthly RT replay drill verifies that detection, revocation, and recovery paths still work end to end.
+Regular RT replay validation checks that detection, revocation, and recovery paths still work end to end.
 
 ---
 
-## Phase 2 Roadmap: From Session Control to Contextual Zero Trust
+## Optional Follow-Up Controls
 
-After this round, Phase 1 goals are in place: Redis-backed session revocation and concurrency-safe anti-replay controls. The refresh path already enforces real-time user status checks and blocks token issuance immediately for locked or disabled accounts.
+The current design already includes Redis-backed session revocation and concurrency-safe anti-replay controls. The refresh path enforces real-time user status checks and blocks token issuance immediately for locked or disabled accounts.
 
-Phase 2 focuses on advanced hijack scenarios under contextual risk:
+If broader hijack scenarios need to be covered later, the following controls can be added:
 
-- Context-aware risk controls: introduce environment fingerprint comparison (IP range + UA hash). On abnormal geographic RT jumps, the system will revoke all AT/RT, freeze the account, and enforce third-party step-up identity verification.
-- False-positive management: because industrial field networks may switch 4G/5G links frequently and legitimately, the policy will be promoted into the critical path only after risk-model tuning and controlled rollout.
+- Environment fingerprint comparison: IP range and UA hash can be compared so that abnormal RT location jumps trigger stricter token invalidation and additional verification.
+- Rule calibration: in complex network environments, legitimate 4G/5G switching and egress drift should be validated before stricter decision rules are enabled.
 
 ---
 
 ## Closing
 
-Authentication resilience is less about token issuance speed and more about containment speed during abnormal events.  
-The key value of this hardening effort is moving AT/RT from “works” to “governable”.
+One focus of authentication resilience is containment during abnormal events.  
+This hardening work adds session revocation and concurrency-safe anti-replay controls to the RT refresh path.

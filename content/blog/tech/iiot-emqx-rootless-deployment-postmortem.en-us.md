@@ -38,7 +38,7 @@ The final remediation matched those four chains:
 - stop relying on `emqx ctl` for dynamic loading and render a complete `cluster.hocon` before EMQX starts
 - remove obsolete `resource_opts` fields
 - open inbound `1883` in the security group
-- bypass CSRF for `/api/v1/iot/*` and add constant-time `X-EMQX-Token` validation on `/iot/ingest`
+- bypass CSRF for `<iot-auth-prefix>` and add constant-time `X-M2M-Token` validation on `<iot-ingest-endpoint>`
 
 ---
 
@@ -123,8 +123,8 @@ The backend originally enforced strict `Origin` and `Referer` checks for browser
 
 The resolution was not to turn CSRF off globally, but to split the security model:
 
-- bypass CSRF for the `/api/v1/iot/*` path prefix
-- validate `X-EMQX-Token` on `/iot/ingest`
+- bypass CSRF for the `<iot-auth-prefix>` path prefix
+- validate `X-M2M-Token` on `<iot-ingest-endpoint>`
 - compare the token with `crypto/hmac.Equal` to avoid timing side channels
 
 This kept browser-facing protection in place while switching the IoT ingress path to a mechanism that actually matches M2M traffic.
@@ -175,10 +175,10 @@ After verifying EMQX was listening on `0.0.0.0:1883`, the cloud security-group r
 
 ### 4. Split the M2M Security Path from Browser Security
 
-The backend now bypasses CSRF on `/api/v1/iot/*` and enforces a shared-secret check on `/iot/ingest`. The two request classes are now protected differently:
+The backend now bypasses CSRF on `<iot-auth-prefix>` and enforces a shared-secret check on `<iot-ingest-endpoint>`. The two request classes are now protected differently:
 
 - browser endpoints: CSRF remains enabled
-- IoT M2M endpoints: `X-EMQX-Token` is required
+- IoT M2M endpoints: `X-M2M-Token` is required
 
 That makes the backend security boundary more explicit and avoids mixing browser and device traffic under one validation model.
 
@@ -193,8 +193,8 @@ Validation was completed in three layers.
 Tests for CSRF and token middleware confirmed:
 
 - ordinary web/API requests still return `403` when `Origin` or `Referer` is missing or incorrect
-- the `/api/v1/iot/*` prefix bypasses CSRF
-- `/iot/ingest` rejects missing or invalid tokens
+- the `<iot-auth-prefix>` prefix bypasses CSRF
+- `<iot-ingest-endpoint>` rejects missing or invalid tokens
 
 ### 2. End-to-End MQTT Validation
 
@@ -203,7 +203,7 @@ An external publish test was executed with:
 ```bash
 mosquitto_pub -d -h <Domain> -p 1883 \
   -i "<Device_SN>" -u "<Device_SN>" -P "<Token>" \
-  -t "telemetry/fms/<Device_SN>" \
+  -t "telemetry/device/<device_id>" \
   -m '{"fcs_speed_rpm": 7766, "fcs_soc": 88.9, "fms_fault_code": 0}'
 ```
 
@@ -228,7 +228,7 @@ This troubleshooting cycle leaves a few clear engineering lessons:
 - "the service is listening" does not mean "the service is reachable"; ingress must be verified layer by layer out to the security group or firewall
 - browser security and M2M security should be split explicitly instead of forced into one middleware model
 
-At the current stage, the single-node template-rendering solution is sufficient for MVP verification. If the system moves toward production-grade availability, the next concerns are already clear:
+At the current stage, the single-node template-rendering solution is sufficient for MVP verification. If deployment requirements expand beyond that, the next concerns are already clear:
 
 - broker clustering and centralized configuration management
 - asynchronous buffering between webhook and backend

@@ -19,13 +19,11 @@ func main() {
 
 ### Who am I?
 
-I am a Software Engineer navigating the intersection of **Embedded Systems** and **Cloud Native** technologies.
+I work on industrial communication, protocol systems, and software engineering practice.
 
-With a background in **Power Systems (EMS/PCS)**, I enjoy building reliable systems that bridge the physical and digital worlds.
+Experience includes device connectivity, desktop applications, service-side components, and deployment work.
 
-*   **Core**: C/C++, Golang, Qt, Modbus, CAN, MQTT, IEC-104, IEC-61850, Protocol Conversion
-*   **Focus**: IoT Protocols, Real-time Control, Distributed Systems
+*   **Technologies**: C/C++, Golang, Qt, Modbus, CAN, MQTT, IEC-104
+*   **Topics**: protocol tooling, real-time communication, distributed systems
 
-> "Simplicity is the ultimate sophistication."
-
-This blog serves as a log of my technical explorations and open source contributions.
+This blog records public technical notes and open-source work.

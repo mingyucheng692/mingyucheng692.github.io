@@ -4,7 +4,7 @@ date: 2026-04-03T20:00:00+08:00
 draft: false
 tags: ["Podman", "Systemd", "Rootless", "Container", "Nginx", "Redis", "Go", "Postmortem", "SRE"]
 categories: ["Tech", "Engineering", "Infrastructure"]
-summary: "一次 Rootless Podman + Systemd 托管失效的复盘：从主 Unit 损坏、启动状态判定偏差到部署脚本显式移交 Systemd 接管，梳理已确认的问题、修复动作、验证方式与未覆盖风险。"
+summary: "一次 Rootless Podman + Systemd 托管失效的复盘：从主 Unit 损坏、启动状态判定偏差到部署脚本显式移交 Systemd 控制，梳理已确认的问题、修复动作、验证方式与未覆盖风险。"
 url: "/zh-cn/blog/tech/rootless-podman-systemd-watchdog-postmortem/"
 ---
 
@@ -14,20 +14,20 @@ url: "/zh-cn/blog/tech/rootless-podman-systemd-watchdog-postmortem/"
 
 - 运行时：Rootless Podman 4.9.x
 - 进程托管：Systemd User Units
-- 业务组件：TimescaleDB、Redis、Go Backend、Nginx Frontend
+- 业务组件：TimescaleDB、Redis、Go 后端、Nginx 前端
 - 目标能力：容器异常退出后由 Systemd 自动恢复
 
 ## 事故摘要
 
-- 触发背景：数据库容器异常退出后，现场最先表现为数据库对应 Unit `inactive`，其余服务对应 Unit 仍为 `active`
-- 过程表现：进入修复后，数据库服务先恢复为 `active`，但其余服务一度未被 Systemd 正确接管，出现启动超时、容器状态与 Unit 状态不一致，以及部分服务因频率限制被锁死
+- 触发背景：数据库容器异常退出后，运行环境中最先表现为数据库对应 Unit `inactive`，其余服务对应 Unit 仍为 `active`
+- 过程表现：进入修复后，数据库服务先恢复为 `active`，但其余服务一度未被 Systemd 正确控制，出现启动超时、容器状态与 Unit 状态不一致，以及部分服务因频率限制被锁死
 - 已确认的致因因素：主 Unit 曾被脚本通过 `sed -i` 直接改写，并在 PowerShell 转义截断后被写坏；Compose 与 Systemd 并存导致控制权分离；自动生成的 Unit 仍需后处理；恢复脚本对依赖清理和失败恢复覆盖不足
 - 修复方向：停止用 `sed -i` 直接改主 Unit，改为重新生成 `.service` 后由 Python 脚本修补，并显式把运行期控制权移交给 Systemd，再补齐状态轮询与最终健康检查
 - 当前结果：在当前环境中，恢复路径已能按固定顺序执行，失败时也有明确的诊断入口；但 readiness 判定和监控采集仍待完善
 
 ## 现象与影响
 
-最初现场并不是“所有服务一起掉线”，而是数据库对应 Unit 先变成 `inactive`，其余服务仍保持 `active`。真正把问题放大的，是进入修复和接管阶段后又暴露出另一组现象：
+最初并不是“所有服务一起掉线”，而是数据库对应 Unit 先变成 `inactive`，其余服务仍保持 `active`。真正把问题放大的，是进入修复和恢复控制阶段后又暴露出另一组现象：
 - 有些服务在 `systemctl --user status` 中显示超时重启
 - 有些容器已经 `Up`，但对应的 Systemd 服务却仍是 `inactive`
 - 有些服务因为频繁失败被 Systemd 直接锁死，不再继续重试
@@ -87,7 +87,7 @@ ExecStartPre=-/usr/bin/podman rm -f <db-service>
 EOF
 ```
 
-这样做至少把边界拆清楚了：主 Unit 视为可重建产物，运行期开关统一由 Drop-in 管理。就当前脚本和后续现场结果看，也没有再复现“因原地修改主 Unit 而导致服务文件损坏”的问题。
+这样做至少把边界拆清楚了：主 Unit 视为可重建产物，运行期开关统一由 Drop-in 管理。就当前脚本和后续结果看，也没有再复现“因原地修改主 Unit 而导致服务文件损坏”的问题。
 
 ## 问题二：Systemd 认定失败，但容器实际已经启动
 
@@ -119,15 +119,15 @@ Type=notify
 Type=simple
 ```
 
-这次现场能确认的现象是：在服务尚未完成稳定托管、生成产物仍保持 `Type=notify` 的阶段，容器已经 `Up`，但对应 Unit 仍会在超时后被 Systemd 判为失败并重启。后来的修复做法，是把生成产物中的 `Type=notify` 改成 `Type=simple`，把状态认定切回到“由 Systemd 直接追踪前台进程”。
+这次可以确认的现象是：在服务尚未完成稳定托管、生成产物仍保持 `Type=notify` 的阶段，容器已经 `Up`，但对应 Unit 仍会在超时后被 Systemd 判为失败并重启。后来的修复做法，是把生成产物中的 `Type=notify` 改成 `Type=simple`，把状态认定切回到“由 Systemd 直接追踪前台进程”。
 
 这里需要说明边界：这并不等于已经证明 Rootless 场景下 `notify` 一定不可用，而是当前这套环境里，`notify` 没有表现出稳定、可依赖的就绪语义。对这类长驻前台进程来说，`Type=simple` 是更保守、也更容易排障的选择。
 
 ## 问题三：一部分容器并不在 Systemd 的控制内
 
-更准确地说，这个危险状态出现在修复过程里，而不是最初故障现场：数据库对应 Unit 已恢复为 `active`，但其余服务对应 Unit 仍显示 `inactive (dead)`。
+更准确地说，这个危险状态出现在修复过程里，而不是最初故障阶段：数据库对应 Unit 已恢复为 `active`，但其余服务对应 Unit 仍显示 `inactive (dead)`。
 
-当时现场的状态大致如下：
+当时运行环境中的状态大致如下：
 
 ```bash
 podman ps
@@ -138,14 +138,14 @@ systemctl --user list-units 'container-*.service'
 # ... 其余服务对应 Unit 为 inactive (dead)
 ```
 
-原因是这些容器并不是由 Systemd 拉起，而是早先通过 `podman-compose up -d` 直接启动的。对于这类非托管容器，即使容器进程已经存在，Systemd 也没有进程控制权，自然谈不上稳定接管、失败感知和自动恢复。
+原因是这些容器并不是由 Systemd 拉起，而是早先通过 `podman-compose up -d` 直接启动的。对于这类非托管容器，即使容器进程已经存在，Systemd 也没有进程控制权，自然谈不上稳定控制、失败感知和自动恢复。
 
 这件事暴露出一个容易被忽略的前提：托管能力不仅取决于 Unit 文件是否存在，更取决于进程是不是由 Systemd 持有。如果运行期仍然由 Compose 持有进程控制权，那么配置虽然在，恢复能力并没有真正建立起来。
 
-这里也需要说明实现细节：当前部署脚本并不是完全不用 Compose。它仍会先用 `podman-compose` 完成构建和冷启动，再调用 `watchdog-enable.sh` 生成并修补 Unit，随后显式停止这些 compose 容器，最后由 `systemctl --user start` 按顺序接管。问题不在于“脚本里出现过 `podman-compose`”，而在于运行期是否仍由 Compose 持有进程控制权。后来的调整，就是把这一步接管固定下来：
+这里也需要说明实现细节：当前部署脚本并不是完全不用 Compose。它仍会先用 `podman-compose` 完成构建和冷启动，再调用 `watchdog-enable.sh` 生成并修补 Unit，随后显式停止这些 compose 容器，最后由 `systemctl --user start` 按顺序恢复 Systemd 控制。问题不在于“脚本里出现过 `podman-compose`”，而在于运行期是否仍由 Compose 持有进程控制权。后来的调整，就是把这一步固定下来：
 
-- 停止现有非托管容器，重新由 `systemctl --user start` 接管
-- 在接管前后做状态检查，避免再次留下“容器在跑但 Systemd 不知情”的状态
+- 停止现有非托管容器，重新由 `systemctl --user start` 启动
+- 在恢复控制前后做状态检查，避免再次留下“容器在跑但 Systemd 不知情”的状态
 
 ## 问题四：自动生成与恢复脚本还需要补齐细节
 
@@ -182,7 +182,7 @@ redis-server --rename-command FLUSHALL
 --rename-command FLUSHALL ""
 ```
 
-`-d` 也是同类问题。恢复后对照生成产物与生效 Unit，可以直接看到默认生成结果仍包含 `-d`，而接管用的 Unit 已经将其移除：
+`-d` 也是同类问题。恢复后对照生成产物与生效 Unit，可以直接看到默认生成结果仍包含 `-d`，而最终启用的 Unit 已经将其移除：
 
 ```ini
 # 恢复后重新生成的结果
@@ -232,7 +232,7 @@ Process: ExecStartPre=/usr/bin/podman rm -f <db-service> (code=exited, status=12
 
 - `<db-service>` -> `<redis-service>` -> `<backend-service>` -> `<frontend-service>`
 
-另外，脚本在全部服务接管完成后还会追加一次应用级健康检查，用来确认“服务 active”已经进一步接近“对外可用”。这一步是对 `Type=simple` 取舍的补充，不是每个服务启动时都做的深度 readiness 检查。
+另外，脚本在全部服务按顺序启动完成后还会追加一次应用级健康检查，用来确认应用层接口已经开始响应，而不只是 Unit 进入 `active`。这一步是对 `Type=simple` 取舍的补充，不是每个服务启动时都做的深度 readiness 检查。
 
 交接给 Systemd 后，等待逻辑大致如下：
 
@@ -270,14 +270,14 @@ systemctl --user reset-failed container-<frontend-service>.service
 
 ## 本次故障中已确认的致因因素
 
-这次故障表面上看是数据库异常退出后，现场状态与接管状态不断分裂；回头看，本质上是几类问题叠加：
+这次故障表面上看是数据库异常退出后，服务状态与 Unit 状态不断分裂；回头看，本质上是几类问题叠加：
 
 1. 主 Unit 直接被脚本改写，服务定义本身有被破坏的风险。
 2. `podman-compose` 直接启动和 Systemd 托管并存，容器状态与托管状态会分离。
 3. `podman generate systemd` 的产物不能直接拿来用，还需要补齐 `Type`、`-d` 和参数修补。
 4. 恢复脚本对依赖清理、频控恢复和最终健康检查最初覆盖得不够完整。
 
-这不是某一个开关写错导致的单点问题，而是恢复链路从定义、接管到执行都存在断点。对应的修复思路也不是只处理某一条报错，而是把运行期控制权、生成后的修补动作和失败后的诊断入口一起补齐。
+这不是某一个开关写错导致的单点问题，而是恢复链路在定义、运行归属与执行三个层面都存在断点。对应的修复思路也不是只处理某一条报错，而是把运行期归属、生成后的修补动作和失败后的诊断入口一起补齐。
 
 ---
 
@@ -286,24 +286,24 @@ systemctl --user reset-failed container-<frontend-service>.service
 结合 `watchdog-enable.sh` 和 `deploy-all.sh`，这次实际落地的动作大致如下：
 
 - 部署脚本先校验执行用户、`HOME`、`XDG_RUNTIME_DIR` 和 `DBUS_SESSION_BUS_ADDRESS`，减少 Rootless User Units 因运行环境不一致而失效的概率
-- 部署阶段仍使用 `podman-compose` 完成构建和冷启动，但在交接阶段会显式停掉 compose 容器，再由 Systemd 顺序接管
+- 部署阶段仍使用 `podman-compose` 完成构建和冷启动，但在切换阶段会显式停掉 compose 容器，再由 Systemd 顺序启动
 - `watchdog-enable.sh` 会先备份旧 Unit，再重新生成 `.service`
 - 生成后的 `.service` 改由 Python 脚本做三项修补：改 `Type=simple`、删 `-d`、补 Redis 空参数，同时避开继续用 `sed -i` 直接改主 Unit 时的 PowerShell 转义截断问题
 - Drop-in 中统一写入 `Restart=always`、`RestartSec`、`StartLimit*` 和各服务对应的 `ExecStartPre`
-- 交接给 Systemd 后，脚本按 `<db-service> -> <redis-service> -> <backend-service> -> <frontend-service>` 顺序启动，并通过 `wait_for_service()` 检查 `is-active` / `is-failed`；若失败或超时，直接输出对应 `journalctl`
+- 切换到 Systemd 控制后，脚本按 `<db-service> -> <redis-service> -> <backend-service> -> <frontend-service>` 顺序启动，并通过 `wait_for_service()` 检查 `is-active` / `is-failed`；若失败或超时，直接输出对应 `journalctl`
 - 在拉起 Frontend 前补一次 `reset-failed`，避免残留的频率限制状态阻断恢复
-- 全部服务接管完成后，再追加一次应用级健康检查，确认系统已经从“服务 active”进一步接近“对外可用”
+- 全部服务切换完成后，再追加一次应用级健康检查，确认系统不再只依赖“服务 active”这一状态
 
-这套做法仍然是单机、Rootless、User Units 这组约束下的工程化实现，解决的是“谁接管进程、怎样恢复、失败后怎样排查”这些具体问题，不等于更广义的高可用方案。
+这套做法仍然是单机、Rootless、User Units 这组约束下的工程化实现，解决的是“谁持有进程、怎样恢复、失败后怎样排查”这些具体问题，不等于更广义的可用性方案。
 
 ---
 
 ## 修复后如何验证
 
-- 接管前后对照 `podman ps` 与 `systemctl --user list-units`，确认不再出现“容器在跑但对应 Unit 为 `inactive`”的状态
+- 切换前后对照 `podman ps` 与 `systemctl --user list-units`，确认不再出现“容器在跑但对应 Unit 为 `inactive`”的状态
 - 通过 `wait_for_service()` 轮询 `is-active` / `is-failed`，让服务在启动阶段就暴露失败点，而不是交给固定 `sleep`
 - 若服务失败或超时，立即输出对应 `journalctl`，把排查入口固定到具体 Unit
-- 全部服务接管完成后追加一次应用级 `/health` 检查，用来验证外部可用性不再只依赖 `Type=simple` 的进程在线语义
+- 全部服务切换完成后追加一次应用级 `/health` 检查，用来验证应用层状态不再只依赖 `Type=simple` 的进程在线语义
 
 恢复后再次核对时，四个容器与四个 User Unit 已经重新对齐：
 
@@ -315,7 +315,7 @@ systemctl --user list-units 'container-*.service'
 对应四个 Unit 均为 active (running)
 ```
 
-这些验证主要覆盖“是否由 Systemd 持有进程”“失败时是否能及时暴露”“接管完成后是否对外可用”，还没有扩展到更细的 readiness 信号和监控采集。
+这些验证主要覆盖“是否由 Systemd 持有进程”“失败时是否能及时暴露”“切换完成后应用层检查是否通过”，还没有扩展到更细的 readiness 信号和监控采集。
 
 ---
 
@@ -328,7 +328,7 @@ systemctl --user list-units 'container-*.service'
 
 ---
 
-## 后续演进方向
+## 仍待补充的项
 
 这次修复解决了恢复链路中的几个确定问题，但仍有几类风险没有被完全覆盖，长期维护上还需要继续推进：
 
@@ -336,20 +336,20 @@ systemctl --user list-units 'container-*.service'
 - 当前方案仍依赖 `podman generate systemd` 加脚本修补；只要生成产物的格式、参数展开方式或 Podman 版本行为发生变化，现有补丁逻辑就可能失效，因此是否迁移到 Quadlet 或其他声明式方式，仍需要单独评估。
 - 目前状态验证仍偏脚本内诊断；失败次数、退出码、容器状态、频率限制命中情况还没有接入采集、上报和告警。这意味着脚本外仍缺少持续观测能力，类似问题更可能在故障发生后才被动暴露。
 
-## 这次排障带来的直接改进
+## 本轮调整后的状态
 
 - 进程由谁启动、谁负责重启，边界比之前清楚了
 - 自动生成的 Unit 是否可直接使用，有了明确判断和后处理步骤
-- 接管失败时该看哪一层日志、在哪一步退出，脚本里有了稳定入口
-- 服务 active 与对外可用之间的差异，被补上了一层应用级验证
+- 切换失败时该看哪一层日志、在哪一步退出，脚本里有了稳定入口
+- 服务 active 与应用层检查结果之间的差异，被补上了一层应用级验证
 
-这些改动并不意味着这套方案已经成为更广义的高可用设计，但至少把“重启配置存在却无法稳定恢复”的状态改成了一条更容易验证、也更容易重复执行的恢复链路。
+这些改动并不意味着这套方案已经成为更广义的可用性设计，但至少把“重启配置存在却无法稳定恢复”的状态改成了一条更容易验证、也更容易重复执行的恢复链路。
 
 ## 结语
 
 这次排查最后留下的结论很直接：配置上写了 `Restart=always`，并不代表恢复链路就已经完整。主 Unit 是否稳定、容器是不是由 Systemd 启动、生成产物有没有修补、依赖和频率限制有没有被脚本覆盖，这些细节都会影响最终结果。
 
-至少在这次这套单机 Rootless Podman 场景里，把这些断点补进脚本之后，进程控制权、排查入口和故障处置路径都比之前清楚了很多。这未必意味着方案已经“完美”，但已经把一次原本依赖经验判断的故障恢复，整理成了一条更可解释、也更容易验证的工程链路。
+至少在这次这套单机 Rootless Podman 场景里，把这些断点补进脚本之后，进程控制权、排查入口和故障处理路径都更清楚了。这不表示方案已经完备，但已经把原本依赖经验判断的故障恢复，整理成了一条更容易解释和验证的工程链路。
 
 ---
 
