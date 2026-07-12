@@ -6,6 +6,10 @@ tags: ["Modbus", "Qt6", "C++20", "Open Source", "Tools", "Industrial"]
 categories: ["systems"]
 summary: "A practical guide to a lightweight Modbus tool for embedded development and field commissioning: fast frame building, log viewing, Frame Analyzer with scaling/register annotations/JSON-CSV persistence, Link to Analyzer live linkage, and Force Parse."
 url: "/en-us/blog/tech/modbus-tools-intro/"
+series: ["modbus-tools"]
+cover:
+  image: "/images/modbus-cover.png"
+description: "A deep dive into industrial protocols, Modbus-TCP gateways, and C++ UI optimization."
 ---
 
 ### [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools)
@@ -163,3 +167,8 @@ The design goal of Modbus-Tools is to encapsulate high-frequency debugging opera
 - **Quality assurance**: 42 automated tests + CI/CD integrated with MSVC AddressSanitizer.
 
 If you work on embedded firmware or host-side tools, feel free to try it and share feedback in the [GitHub repository](https://github.com/mingyucheng692/Modbus-Tools).
+
+
+---
+
+> ➡️ [View Project Page](/projects/)

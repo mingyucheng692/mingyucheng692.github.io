@@ -7,6 +7,10 @@ tags: ["Modbus", "Qt6", "C++", "Deadlock", "Multithreading", "Industrial Softwar
 categories: ["systems"]
 summary: "A field note on shutdown deadlocks and timeout misjudgment in a Qt multithreaded Modbus workflow, with practical fixes."
 url: "/en-us/blog/tech/modbus-deadlock-fix-notes/"
+series: ["modbus-tools"]
+cover:
+  image: "/images/modbus-cover.png"
+description: "A deep dive into industrial protocols, Modbus-TCP gateways, and C++ UI optimization."
 ---
 
 During iteration of `Modbus-Tools`, we met a classic concurrency issue: the UI window closed, but the process stayed alive and the debug session could not exit cleanly. After addressing that, timeout misjudgment and re-entrancy contention also surfaced. This note records the diagnosis and fixes.

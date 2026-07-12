@@ -7,6 +7,10 @@ tags: ["Modbus", "Qt6", "C++", "Deadlock", "Multithreading", "Industrial Softwar
 categories: ["systems"]
 summary: "记录一次 Qt 多线程 Modbus 场景中的退出死锁与超时误判问题，以及对应的工程化修复方案。"
 url: "/zh-cn/blog/tech/modbus-deadlock-fix-notes/"
+series: ["modbus-tools"]
+cover:
+  image: "/images/modbus-cover.png"
+description: "A deep dive into industrial protocols, Modbus-TCP gateways, and C++ UI optimization."
 ---
 
 在 `Modbus-Tools` 的迭代过程中，遇到过一次典型的并发问题：窗口已关闭，但进程未退出，调试会话也无法正常结束。后续修复中，又暴露出通信超时误判与重入竞争问题。本文记录排查过程与最终方案。
