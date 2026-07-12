@@ -3,7 +3,7 @@ title: "IIoT 平台 H.265 HTTP-FLV 浏览器取流排查记录"
 date: 2026-06-28T21:30:00+08:00
 draft: false
 tags: ["HTTP-FLV", "H.265", "WASM", "Jessibuca", "JavaScript", "Python", "AbortController", "Debugging"]
-categories: ["Tech", "Engineering", "Troubleshooting"]
+categories: ["iot"]
 summary: "记录一次 IIoT 平台 H.265 HTTP-FLV 浏览器取流问题的排查过程：从播放链接验证、桌面播放器兼容性确认、本地 FLV 基线验证，到将 `fetchError`、`WinError 10053` 与前端 `TypeError` 串联定位，并沉淀出可复用的调试 SOP。"
 url: "/zh-cn/blog/tech/h265-http-flv-browser-stream-debugging/"
 ---

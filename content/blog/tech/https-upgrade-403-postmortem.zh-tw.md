@@ -3,7 +3,7 @@ title: "記一次 HTTPS 升級引發的 403 排查：從安全中介軟體到容
 date: 2026-03-17T12:00:00+08:00
 draft: false
 tags: ["HTTPS", "Nginx", "Go", "Gin", "CORS", "CSRF", "Podman", "Rootless", "Postmortem"]
-categories: ["Tech", "Engineering", "Security"]
+categories: ["infra"]
 summary: "一次 HTTPS 協議升級後穩定復現 403 的排障復盤，最終定位為 CSRF 白名單遺漏與 Podman Rootless 映像隔離的疊加問題。"
 url: "/zh-tw/blog/tech/https-upgrade-403-postmortem/"
 ---

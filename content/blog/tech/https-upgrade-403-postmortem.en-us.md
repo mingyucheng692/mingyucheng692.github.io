@@ -3,7 +3,7 @@ title: "HTTPS Upgrade Triggered 403: A Deep Postmortem from Security Middleware 
 date: 2026-03-17T12:00:00+08:00
 draft: false
 tags: ["HTTPS", "Nginx", "Go", "Gin", "CORS", "CSRF", "Podman", "Rootless", "Postmortem"]
-categories: ["Tech", "Engineering", "Security"]
+categories: ["infra"]
 summary: "A postmortem on a persistent 403 after HTTPS migration, traced to both missing CSRF allowlist updates and Podman Rootless image namespace isolation."
 url: "/en-us/blog/tech/https-upgrade-403-postmortem/"
 ---

@@ -21,7 +21,7 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "Industrial Communication | Protocol Systems | Edge Gateway Software"
+        subtitle: "Linux C++ · EMS Storage · Protocol Gateway"
         imageUrl: "/images/avatar-github-cat.png"
         imageWidth: 120
         imageHeight: 120
@@ -34,14 +34,30 @@ languages:
             url: "blog"
     menu:
       main:
+        - identifier: systems
+          name: "Linux & Industrial Software"
+          url: "categories/systems/"
+          weight: 10
+        - identifier: iot
+          name: "Device Connectivity & IoT"
+          url: "categories/iot/"
+          weight: 20
+        - identifier: infra
+          name: "Backend & Infrastructure"
+          url: "categories/infra/"
+          weight: 30
+        - identifier: misc
+          name: "Misc"
+          url: "categories/misc/"
+          weight: 40
         - identifier: tags
           name: "Tags"
           url: "tags/"
-          weight: 18
+          weight: 48
         - identifier: search
           name: "Search"
           url: "search/"
-          weight: 20
+          weight: 50
   zh-cn:
     languageName: "简体中文"
     weight: 2
@@ -50,7 +66,7 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "工业通信 | 协议系统 | 边缘网关软件"
+        subtitle: "Linux C++ · EMS 储能 · 协议网关"
         imageUrl: "/images/avatar-github-cat.png"
         imageWidth: 120
         imageHeight: 120
@@ -63,14 +79,30 @@ languages:
             url: "blog"
     menu:
       main:
+        - identifier: systems
+          name: "Linux & 工业软件"
+          url: "categories/systems/"
+          weight: 10
+        - identifier: iot
+          name: "设备接入 & IoT"
+          url: "categories/iot/"
+          weight: 20
+        - identifier: infra
+          name: "后端 & 基础设施"
+          url: "categories/infra/"
+          weight: 30
+        - identifier: misc
+          name: "Misc"
+          url: "categories/misc/"
+          weight: 40
         - identifier: tags
           name: "标签"
           url: "tags/"
-          weight: 18
+          weight: 48
         - identifier: search
           name: "搜索"
           url: "search/"
-          weight: 20
+          weight: 50
   zh-tw:
     languageName: "繁體中文"
     weight: 3
@@ -79,7 +111,7 @@ languages:
       profileMode:
         enabled: true
         title: "Intent"
-        subtitle: "工業通信 | 協議系統 | 邊緣閘道軟體"
+        subtitle: "Linux C++ · EMS 儲能 · 協議閘道"
         imageUrl: "/images/avatar-github-cat.png"
         imageWidth: 120
         imageHeight: 120
@@ -92,14 +124,30 @@ languages:
             url: "blog"
     menu:
       main:
+        - identifier: systems
+          name: "Linux & 工業軟體"
+          url: "categories/systems/"
+          weight: 10
+        - identifier: iot
+          name: "設備接入 & IoT"
+          url: "categories/iot/"
+          weight: 20
+        - identifier: infra
+          name: "後端 & 基礎設施"
+          url: "categories/infra/"
+          weight: 30
+        - identifier: misc
+          name: "Misc"
+          url: "categories/misc/"
+          weight: 40
         - identifier: tags
           name: "標籤"
           url: "tags/"
-          weight: 18
+          weight: 48
         - identifier: search
           name: "搜尋"
           url: "search/"
-          weight: 20
+          weight: 50
 
 minify:
   disableXML: true

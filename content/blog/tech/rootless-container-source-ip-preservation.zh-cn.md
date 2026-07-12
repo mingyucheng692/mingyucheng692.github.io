@@ -3,7 +3,7 @@ title: "Rootless 容器入向源 IP 保留：架构权衡与 Hybrid Host-Bridge 
 date: 2026-07-11T20:00:00+08:00
 draft: false
 tags: ["Podman", "Rootless", "Nginx", "EMQX", "Networking", "NAT", "Source-IP", "Container", "Postmortem"]
-categories: ["Tech", "Engineering", "Infrastructure", "Security"]
+categories: ["infra"]
 summary: "记录一次 Rootless Podman 下入向源 IP 被 NAT 改写问题的架构分析与方案落地。通过 Hybrid Host-Bridge 拓扑在边缘服务保留客户端真实 IP，同时维持内部服务的网络隔离，并给出方案选型权衡、实现细节与验证方法论。"
 url: "/zh-cn/blog/tech/rootless-container-source-ip-preservation/"
 ---

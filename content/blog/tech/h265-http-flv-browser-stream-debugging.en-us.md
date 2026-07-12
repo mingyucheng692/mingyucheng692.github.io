@@ -3,7 +3,7 @@ title: "Troubleshooting H.265 HTTP-FLV Browser Streaming on an IIoT Platform"
 date: 2026-06-28T21:30:00+08:00
 draft: false
 tags: ["HTTP-FLV", "H.265", "WASM", "Jessibuca", "JavaScript", "Python", "AbortController", "Debugging"]
-categories: ["Tech", "Engineering", "Troubleshooting"]
+categories: ["iot"]
 summary: "This post documents an H.265 HTTP-FLV browser streaming issue on an IIoT platform, from playback URL validation and desktop player compatibility checks to local FLV baseline verification and correlating `fetchError`, `WinError 10053`, and a frontend `TypeError` into a reusable debugging SOP."
 url: "/en-us/blog/tech/h265-http-flv-browser-stream-debugging/"
 ---

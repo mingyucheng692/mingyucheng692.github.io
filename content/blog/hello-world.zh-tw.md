@@ -2,7 +2,7 @@
 title: "Hello World"
 date: 2026-02-01T12:00:00+08:00
 draft: false
-categories: ["Life"]
+categories: ["misc"]
 tags: ["Golang", "Intro"]
 summary: "fmt.Println(\"你好，Intent\")"
 ---
