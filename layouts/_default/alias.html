@@ -1,0 +1,48 @@
+{{- /* $isRootStub: true only for the root "/" redirect stub (target = default-language home /en-us/).
+   - Root stub -> inject language auto-redirect JS, no robots noindex (let crawlers follow meta-refresh to /en-us/).
+   - Other alias pages (pagination etc.) -> no JS, add robots noindex to avoid indexing empty stubs.
+   - "en-us" hardcoded because site.DefaultContentLanguage is not accessible in alias template context. */}}
+{{- $isRootStub := eq .RelPermalink "/en-us/" -}}
+<!DOCTYPE html>
+<html lang="{{ .Lang }}">
+<head>
+<title>{{ .Permalink }}</title>
+<link rel="canonical" href="{{ .Permalink }}">
+<meta charset="utf-8">
+{{- if not $isRootStub }}
+<meta name="robots" content="noindex">
+{{- end }}
+<meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+{{- if $isRootStub }}
+{{- /* Browser-language auto-redirect. Activates ONLY on root path "/" (the default-language redirect stub).
+   - Deep links (e.g. /en-us/blog/xxx, /zh-cn/) never trigger this — the pathname check below gates it.
+   - Priority: ?noredir=1 (debug) > stored lang-pref-set (manual choice, never expires) > navigator.languages detection.
+   - zh-tw|zh-hant|zh-hk|zh-mo -> zh-tw ; zh-cn|zh-hans|zh-sg|zh -> zh-cn ; en* & unmatched -> en-us (meta-refresh handles default). */}}
+<script>
+(function () {
+    try {
+        if (window.location.pathname !== '/') return;
+        if (new URLSearchParams(window.location.search).get('noredir') === '1') return;
+        var pref = localStorage.getItem('lang-pref-set');
+        if (pref === 'zh-cn' || pref === 'zh-tw') {
+            window.location.replace('/' + pref + '/');
+            return;
+        }
+        if (pref === 'en-us') return;
+        var langs = navigator.languages || [navigator.language || ''];
+        var target = 'en-us';
+        for (var i = 0; i < langs.length; i++) {
+            var l = (langs[i] || '').toLowerCase();
+            if (!l) continue;
+            if (l.indexOf('zh-tw') === 0 || l.indexOf('zh-hant') === 0 || l.indexOf('zh-hk') === 0 || l.indexOf('zh-mo') === 0) { target = 'zh-tw'; break; }
+            if (l.indexOf('zh-cn') === 0 || l.indexOf('zh-hans') === 0 || l.indexOf('zh-sg') === 0 || l.indexOf('zh') === 0) { target = 'zh-cn'; break; }
+            if (l.indexOf('en') === 0) { target = 'en-us'; break; }
+        }
+        if (target === 'en-us') return;
+        window.location.replace('/' + target + '/');
+    } catch (e) { }
+})();
+</script>
+{{- end }}
+</head>
+</html>

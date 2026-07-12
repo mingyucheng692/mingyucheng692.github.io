@@ -106,7 +106,7 @@
                 {{- range $translations }}
                     {{- $lang := .Lang -}}
                     <a class="lang-tag{{ if eq $lang $current.Lang }} active{{ end }}" href="{{ .RelPermalink }}" title="{{ .Language.LanguageName }}"
-                        aria-label="{{ .Language.LanguageName }}">
+                        aria-label="{{ .Language.LanguageName }}" onclick="localStorage.setItem('lang-pref-set','{{ .Lang }}')">
                         <span class="lang-name">{{ .Language.LanguageName }}</span>
                     </a>
                 {{- end }}

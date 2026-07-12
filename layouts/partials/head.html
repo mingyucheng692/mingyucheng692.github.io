@@ -110,6 +110,10 @@
 {{- range .AllTranslations -}}
 <link rel="alternate" hreflang="{{ .Lang }}" href="{{ .Permalink }}">
 {{ end -}}
+{{- /* x-default: point to en-us translation of the current page (fallback language for unmatched locales) */}}
+{{- with index (where .AllTranslations "Lang" "en-us") 0 -}}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end -}}
 
 <noscript>
     <style>
