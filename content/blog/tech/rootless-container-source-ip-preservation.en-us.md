@@ -3,7 +3,7 @@ title: "Rootless Container Inbound Source IP Preservation: Hybrid Host-Bridge To
 date: 2026-07-11T20:00:00+08:00
 draft: false
 tags: ["Podman", "Rootless", "Nginx", "EMQX", "Networking", "NAT", "Source-IP", "Container", "Postmortem"]
-categories: ["infra"]
+categories: ["backend-infra"]
 summary: "Architecture analysis and implementation of inbound source IP preservation under Rootless Podman. Uses a Hybrid Host-Bridge topology to retain real client IPs at edge services while preserving network isolation for internal services, with tradeoff analysis, implementation details, and verification methodology."
 url: "/en-us/blog/tech/rootless-container-source-ip-preservation/"
 ---

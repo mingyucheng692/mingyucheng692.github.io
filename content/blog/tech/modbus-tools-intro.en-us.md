@@ -3,7 +3,7 @@ title: "Modbus-Tools Deep Dive: A Practical Modbus Workflow for Daily Debugging"
 date: 2026-02-28T12:00:00+08:00
 lastmod: 2026-04-21T12:00:00+08:00
 tags: ["Modbus", "Qt6", "C++20", "Open Source", "Tools", "Industrial"]
-categories: ["systems"]
+categories: ["industrial-software"]
 summary: "A practical guide to a lightweight Modbus tool for embedded development and field commissioning: fast frame building, log viewing, Frame Analyzer with scaling/register annotations/JSON-CSV persistence, Link to Analyzer live linkage, and Force Parse."
 url: "/en-us/blog/tech/modbus-tools-intro/"
 series: ["modbus-tools"]

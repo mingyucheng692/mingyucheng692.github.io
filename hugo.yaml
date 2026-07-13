@@ -31,25 +31,9 @@ languages:
           - name: "Project"
             url: "projects"
           - name: "Blog"
-            url: "blog"
+            url: "categories"
     menu:
       main:
-        - identifier: systems
-          name: "Linux & Industrial Software"
-          url: "categories/systems/"
-          weight: 10
-        - identifier: iot
-          name: "Device Connectivity & IoT"
-          url: "categories/iot/"
-          weight: 20
-        - identifier: infra
-          name: "Backend & Infrastructure"
-          url: "categories/infra/"
-          weight: 30
-        - identifier: misc
-          name: "Misc"
-          url: "categories/misc/"
-          weight: 40
         - identifier: tags
           name: "Tags"
           url: "tags/"
@@ -76,25 +60,9 @@ languages:
           - name: "项目"
             url: "projects"
           - name: "博客"
-            url: "blog"
+            url: "categories"
     menu:
       main:
-        - identifier: systems
-          name: "Linux & 工业软件"
-          url: "categories/systems/"
-          weight: 10
-        - identifier: iot
-          name: "设备接入 & IoT"
-          url: "categories/iot/"
-          weight: 20
-        - identifier: infra
-          name: "后端 & 基础设施"
-          url: "categories/infra/"
-          weight: 30
-        - identifier: misc
-          name: "Misc"
-          url: "categories/misc/"
-          weight: 40
         - identifier: tags
           name: "标签"
           url: "tags/"
@@ -121,25 +89,9 @@ languages:
           - name: "專案"
             url: "projects"
           - name: "博客"
-            url: "blog"
+            url: "categories"
     menu:
       main:
-        - identifier: systems
-          name: "Linux & 工業軟體"
-          url: "categories/systems/"
-          weight: 10
-        - identifier: iot
-          name: "設備接入 & IoT"
-          url: "categories/iot/"
-          weight: 20
-        - identifier: infra
-          name: "後端 & 基礎設施"
-          url: "categories/infra/"
-          weight: 30
-        - identifier: misc
-          name: "Misc"
-          url: "categories/misc/"
-          weight: 40
         - identifier: tags
           name: "標籤"
           url: "tags/"

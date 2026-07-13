@@ -3,7 +3,7 @@ title: "Modbus-Tools 深度解析：高效輕量的工業協議調試利器"
 date: 2026-02-28T12:00:00+08:00
 lastmod: 2026-04-21T12:00:00+08:00
 tags: ["Modbus", "Qt6", "C++20", "Open Source", "Tools", "Industrial"]
-categories: ["systems"]
+categories: ["industrial-software"]
 summary: "面向嵌入式開發與現場聯調的輕量級 Modbus 工具。介紹快速發幀、日誌查看、幀解析（倍率換算、寄存器註解、JSON / CSV 配置持久化）、Link to Analyzer 即時聯動分析等功能的實際用法。"
 url: "/zh-tw/blog/tech/modbus-tools-intro/"
 series: ["modbus-tools"]

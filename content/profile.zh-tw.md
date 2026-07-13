@@ -1,20 +1,20 @@
 ---
 title: "概況"
 layout: "page"
-summary: "工業通信、協議系統、邊緣閘道與 Linux 工程實踐概況"
+summary: "Linux/EMS 軟體開發工程師 — 儲能 EMS 系統與電力協議閘道工程實踐"
 robotsNoIndex: true
 searchHidden: true
+aliases:
+  - /resume/
 ---
 
 <div class="profile-wrapper">
 
 # 概況
 
-工作範圍：設備接入、協議轉換、邊緣閘道與工業軟體工程實踐。  
-經驗包括：Qt 上位機開發、MCU 通信與業務邏輯實作，以及 Linux 環境下的構建、部署與維護。  
-相關方向：Linux、工業協議與系統工程。
+Linux/EMS 軟體開發工程師,3 年經驗。聚焦儲能 EMS 系統與電力協議閘道開發,技術棧以 C++/Linux/Qt 為核心,覆蓋從嵌入式韌體到 Linux 應用開發的全鏈路工程實踐。
 
-<span style="white-space: nowrap;">郵箱：<a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">點擊獲取</a></span> ｜ <span style="white-space: nowrap;">專案：<a href="/zh-tw/projects/" class="profile-contact-link">專案</a></span> ｜ <span style="white-space: nowrap;">博客：<a href="/zh-tw/blog/" class="profile-contact-link">博客</a></span> ｜ <span style="white-space: nowrap;">GitHub：<a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
+<span style="white-space: nowrap;">信箱:<a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">點擊獲取</a></span> ｜ <span style="white-space: nowrap;">專案:<a href="/zh-tw/projects/" class="profile-contact-link">專案</a></span> ｜ <span style="white-space: nowrap;">部落格:<a href="/zh-tw/blog/" class="profile-contact-link">部落格</a></span> ｜ <span style="white-space: nowrap;">GitHub:<a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
 <script>
   (function() {
       if (typeof window._hw !== 'undefined') return;
@@ -26,20 +26,26 @@ searchHidden: true
   })();
 </script>
 
-## 經驗
+## 方向
 
-- **方向**：工業通信 ｜ 協議轉換 ｜ 邊緣閘道 ｜ 軟體工程
-- **協議**：Modbus RTU / TCP ｜ IEC-104 ｜ MQTT ｜ CAN
-- **實作**：C / C++ ｜ Linux ｜ Docker / Podman ｜ Redis / PostgreSQL
-- **基礎**：Qt ｜ MCU / FreeRTOS ｜ 現場聯調與診斷工具
+- 儲能 EMS 系統開發:電力協議閘道、多源裝置資料接入與協議解析
+- Linux 應用開發:IPC、多執行緒併發、TCP/UDP 網路程式設計
+- 工業協議:IEC-61850(GOOSE/MMS)、IEC-104、Modbus、CAN、MQTT
 
-## 代表工作
+## 技術棧
 
-- [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools)：公開開源的工業調試工具
-- [博客](/zh-tw/blog/)：工業通信、穩定性、協議工具與問題復盤文章
+- 語言:C/C++(C++11/17)
+- 平台:Linux、Qt、嵌入式(STM32/HC32/FreeRTOS)
+- 後端:Go、Redis、PostgreSQL
+- 容器:Podman、Docker、Systemd
+
+## 開源
+
+- [Modbus-Tools](https://github.com/mingyucheng692/Modbus-Tools):跨平台 Modbus 除錯工具 — [文章](/zh-tw/blog/tech/modbus-tools-intro/) · [倉庫](https://github.com/mingyucheng692/Modbus-Tools)
+- 更多程式碼見 [GitHub](https://github.com/mingyucheng692)
 
 ## 聯絡
 
-- 如需詳細背景資訊，可透過上方郵箱聯絡
+如需詳細背景資訊,可透過上方信箱聯絡,將在附件中提供完整履歷 PDF。
 
 </div>

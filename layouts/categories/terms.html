@@ -1,0 +1,95 @@
+{{- define "main" }}
+
+<header class="page-header">
+    <h1>
+        {{ if eq .Site.Language.Lang "en-us" }}Blog Categories{{ else if eq .Site.Language.Lang "zh-tw" }}博客分類{{ else }}博客分类{{ end }}
+    </h1>
+</header>
+
+{{ partial "view_switch.html" . }}
+
+<div class="categories-hybrid-list">
+    {{- $terms := .Data.Terms }}
+    {{- $pages := slice }}
+    {{- range $key, $value := $terms }}
+        {{- $pages = $pages | append (site.GetPage (printf "/categories/%s" $key)) }}
+    {{- end }}
+    {{- $sortedPages := sort $pages "Weight" "desc" }}
+    
+    {{- range $sortedPages }}
+        {{- $isPrimary := eq .Weight 10 }}
+        {{- $sortedPosts := .Pages.ByDate.Reverse }}
+        
+        <div class="category-block {{ if $isPrimary }}category-primary{{ else }}category-secondary{{ end }}">
+            <h2 class="category-title">
+                <a href="{{ .Permalink }}">{{ .Title }} <sup>{{ len .Pages }}</sup></a>
+            </h2>
+            {{- if .Description }}
+                <p class="category-description">{{ .Description }}</p>
+            {{- end }}
+            
+            {{- if $isPrimary }}
+                <div class="category-posts">
+                    <ul class="compact-post-list primary-list">
+                    {{- range first 3 $sortedPosts }}
+                        <li>
+                            <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+                            <a href="{{ .Permalink }}" class="post-link">{{ .Title }}</a>
+                        </li>
+                    {{- end }}
+                    </ul>
+                </div>
+                {{- if gt (len .Pages) 3 }}
+                <div class="view-all-wrapper">
+                    <a class="view-all-btn" href="{{ .Permalink }}">{{ if eq .Site.Language.Lang "en-us" }}View all {{ len .Pages }} articles →{{ else if eq .Site.Language.Lang "zh-tw" }}查看該領域全部 {{ len .Pages }} 篇文章 →{{ else }}查看该领域全部 {{ len .Pages }} 篇文章 →{{ end }}</a>
+                </div>
+                {{- end }}
+            {{- else }}
+                <details class="category-details" {{ if eq (len .Pages) 1 }}open{{ end }}>
+                    <summary>{{ if eq .Site.Language.Lang "en-us" }}Expand{{ else if eq .Site.Language.Lang "zh-tw" }}展開{{ else }}展开{{ end }}</summary>
+                    <ul class="compact-post-list">
+                    {{- range first 2 $sortedPosts }}
+                        <li>
+                            <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+                            <a href="{{ .Permalink }}" class="post-link">{{ .Title }}</a>
+                        </li>
+                    {{- end }}
+                    </ul>
+                    {{- if gt (len .Pages) 2 }}
+                    <a class="view-all-link" href="{{ .Permalink }}">{{ if eq .Site.Language.Lang "en-us" }}View all →{{ else if eq .Site.Language.Lang "zh-tw" }}查看全部 →{{ else }}查看全部 →{{ end }}</a>
+                    {{- end }}
+                </details>
+            {{- end }}
+        </div>
+    {{- end }}
+</div>
+
+<style>
+.category-block { margin-bottom: 40px; }
+.category-title { margin-bottom: 12px; font-size: 1.8em; }
+.category-title a { text-decoration: none; color: var(--primary); }
+.category-title sup { font-size: 0.5em; color: var(--secondary); margin-left: 5px; top: -1em; }
+.category-description { color: var(--secondary); font-size: 1em; margin-bottom: 20px; line-height: 1.6; }
+
+.view-all-wrapper { text-align: left; margin-top: 15px; }
+.view-all-btn { display: inline-block; font-weight: 600; color: var(--primary); font-size: 0.95em; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.view-all-btn:hover { border-color: var(--primary); }
+
+.category-secondary .category-details { background: var(--entry); border: 1px solid var(--border); border-radius: var(--radius); padding: 15px 20px; }
+.category-secondary summary { cursor: pointer; font-weight: 600; color: var(--secondary); user-select: none; list-style: none; display: flex; align-items: center; }
+.category-secondary summary::-webkit-details-marker { display: none; }
+.category-secondary summary::before { content: "▸"; display: inline-block; margin-right: 10px; transition: transform 0.2s; }
+.category-secondary details[open] summary::before { transform: rotate(90deg); }
+.category-secondary summary:hover { color: var(--primary); }
+
+.compact-post-list { list-style: none; padding-left: 0; margin: 15px 0 0 0; }
+.category-primary .compact-post-list { margin-top: 0; }
+.compact-post-list li { padding: 12px 0; border-top: 1px dashed var(--border); display: flex; gap: 15px; align-items: baseline; }
+.category-primary .compact-post-list li:first-child { border-top: none; padding-top: 0; }
+.post-date { color: var(--tertiary); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 0.85em; flex-shrink: 0; }
+.post-link { color: var(--primary); text-decoration: none; font-size: 1em; line-height: 1.4; transition: color 0.2s; }
+.post-link:hover { color: var(--secondary); text-decoration: underline; text-underline-offset: 4px; }
+.view-all-link { display: block; margin-top: 15px; font-size: 0.9em; font-weight: 600; color: var(--primary); text-align: left; }
+</style>
+
+{{- end }}{{/* end main */}}

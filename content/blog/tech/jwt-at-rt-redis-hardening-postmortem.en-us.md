@@ -3,7 +3,7 @@ title: "JWT Dual-Token Hardening Postmortem: From Stateless Refresh to Revocable
 date: 2026-03-23T10:00:00+08:00
 draft: false
 tags: ["JWT", "Access Token", "Refresh Token", "Redis", "Go", "Gin", "Security", "Zero Trust", "Postmortem"]
-categories: ["Tech", "Engineering", "Security"]
+categories: ["backend-infra"]
 summary: "A security hardening postmortem for JWT AT/RT architecture: treating Redis reservation as completed and implementing RT rotation, replay detection, and revocable sessions."
 url: "/en-us/blog/tech/jwt-at-rt-redis-hardening-postmortem/"
 ---

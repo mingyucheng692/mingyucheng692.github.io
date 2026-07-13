@@ -1,0 +1,21 @@
+{{ $isArchive := eq .Layout "archives" }}
+<div class="view-switch-container">
+    <a href="{{ if eq .Site.Language.Lang "en-us" }}/categories/{{ else }}/{{ .Site.Language.Lang }}/categories/{{ end }}" 
+       class="view-switch-tab {{ if not $isArchive }}active{{ end }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        {{ if eq .Site.Language.Lang "en-us" }}By Category{{ else if eq .Site.Language.Lang "zh-tw" }}按分類瀏覽{{ else }}按分类浏览{{ end }}
+    </a>
+    <a href="{{ if eq .Site.Language.Lang "en-us" }}/blog/archive/{{ else }}/{{ .Site.Language.Lang }}/blog/archive/{{ end }}" 
+       class="view-switch-tab {{ if $isArchive }}active{{ end }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        {{ if eq .Site.Language.Lang "en-us" }}Timeline{{ else if eq .Site.Language.Lang "zh-tw" }}時間線{{ else }}时间线{{ end }}
+    </a>
+</div>
+
+<style>
+.view-switch-container { display: flex; justify-content: center; gap: 12px; margin: 20px 0 40px; }
+.view-switch-tab { display: flex; align-items: center; gap: 8px; padding: 10px 24px; border-radius: 12px; background: var(--entry); border: 1px solid var(--border); color: var(--secondary); text-decoration: none; font-weight: 500; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.view-switch-tab:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.04); }
+.view-switch-tab.active { background: var(--primary); color: var(--theme); border-color: var(--primary); }
+.view-switch-tab.active svg { stroke: var(--theme); }
+</style>

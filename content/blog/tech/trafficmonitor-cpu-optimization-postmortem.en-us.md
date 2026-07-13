@@ -3,7 +3,7 @@ title: "TrafficMonitor CPU Optimization Postmortem: An Engineering Simplificatio
 date: 2026-04-26T10:00:00+08:00
 draft: false
 tags: ["TrafficMonitor", "Qt", "C++", "Modbus", "Performance", "CPU", "Postmortem"]
-categories: ["Tech", "Engineering"]
+categories: ["industrial-software"]
 summary: "A postmortem on CPU optimization under a high-frequency polling workload: by shrinking the UI logging path, removing high-frequency state machines, and fixing the wait model, CPU usage dropped from 3.6%~4.2% to 0.1%~0.6%."
 url: "/en-us/blog/tech/trafficmonitor-cpu-optimization-postmortem/"
 ---

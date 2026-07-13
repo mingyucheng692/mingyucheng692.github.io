@@ -4,7 +4,7 @@ date: 2026-03-07T10:00:00+08:00
 draft: false
 weight: 1
 tags: ["Modbus", "Qt6", "C++", "Deadlock", "Multithreading", "Industrial Software"]
-categories: ["systems"]
+categories: ["industrial-software"]
 summary: "记录一次 Qt 多线程 Modbus 场景中的退出死锁与超时误判问题，以及对应的工程化修复方案。"
 url: "/zh-cn/blog/tech/modbus-deadlock-fix-notes/"
 series: ["modbus-tools"]

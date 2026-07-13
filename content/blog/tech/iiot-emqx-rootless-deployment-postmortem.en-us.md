@@ -3,7 +3,7 @@ title: "IIoT Ingress Postmortem: Troubleshooting EMQX 5.8 Under Podman Rootless"
 date: 2026-05-28T18:59:25+08:00
 draft: false
 tags: ["IIoT", "MQTT", "EMQX", "Podman", "Rootless", "Erlang", "HOCON", "Webhook", "CSRF", "Postmortem"]
-categories: ["Tech", "Engineering", "Infrastructure", "Security"]
+categories: ["backend-infra"]
 summary: "A postmortem of an IIoT ingress deployment failure: under Podman Rootless, EMQX 5.8 exposed unstable Erlang IPC, HOCON schema validation failures, a blocked security-group port, and M2M requests rejected by CSRF middleware. This post covers the confirmed causes, fixes, and validation path."
 url: "/en-us/blog/tech/iiot-emqx-rootless-deployment-postmortem/"
 ---

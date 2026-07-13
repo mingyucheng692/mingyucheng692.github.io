@@ -3,7 +3,7 @@ title: "记一次 HTTPS 升级引发的 403 排查：从安全中间件到容器
 date: 2026-03-17T12:00:00+08:00
 draft: false
 tags: ["HTTPS", "Nginx", "Go", "Gin", "CORS", "CSRF", "Podman", "Rootless", "Postmortem"]
-categories: ["infra"]
+categories: ["backend-infra"]
 summary: "一次 HTTPS 协议升级后稳定复现 403 的排障复盘，最终定位为 CSRF 白名单遗漏与 Podman Rootless 镜像隔离叠加问题。"
 url: "/zh-cn/blog/tech/https-upgrade-403-postmortem/"
 ---
