@@ -9,6 +9,13 @@ buildFuture: false
 buildExpired: false
 hasCJKLanguage: true
 
+# Move categories taxonomy under /blog/ namespace
+permalinks:
+  taxonomy:
+    categories: /blog/categories/
+  term:
+    categories: /blog/categories/:slug/
+
 # Multilingual Configuration
 defaultContentLanguage: en-us
 defaultContentLanguageInSubdir: true
@@ -26,12 +33,12 @@ languages:
         imageWidth: 120
         imageHeight: 120
         buttons:
-          - name: "Overview"
-            url: "profile"
+          - name: "Resume"
+            url: "resume"
           - name: "Project"
             url: "projects"
           - name: "Blog"
-            url: "categories"
+            url: "blog/categories"
     menu:
       main:
         - identifier: tags
@@ -55,12 +62,12 @@ languages:
         imageWidth: 120
         imageHeight: 120
         buttons:
-          - name: "概况"
-            url: "profile"
+          - name: "简历"
+            url: "resume"
           - name: "项目"
             url: "projects"
           - name: "博客"
-            url: "categories"
+            url: "blog/categories"
     menu:
       main:
         - identifier: tags
@@ -84,12 +91,12 @@ languages:
         imageWidth: 120
         imageHeight: 120
         buttons:
-          - name: "概況"
-            url: "profile"
+          - name: "履歷"
+            url: "resume"
           - name: "專案"
             url: "projects"
           - name: "博客"
-            url: "categories"
+            url: "blog/categories"
     menu:
       main:
         - identifier: tags
@@ -108,6 +115,7 @@ minify:
 params:
   displayFullLangName: true
   env: production
+  mainSections: ["blog"]
   description: "Industrial communication, protocol systems, edge gateway software, and energy digitalization."
   author: "Intent"
   DateFormat: "2006-01-02"

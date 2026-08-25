@@ -1,20 +1,17 @@
 ---
-title: "概况"
+title: "简历"
 layout: "page"
 summary: "Linux/EMS 软件开发工程师 — 储能 EMS 系统与电力协议网关工程实践"
-robotsNoIndex: true
-searchHidden: true
-aliases:
-  - /resume/
+description: "Linux/EMS 软件工程师简历 — 3 年储能 EMS 与电力协议网关开发经验,代表作 Modbus-Tools。"
 ---
 
-<div class="profile-wrapper">
+<div class="resume-wrapper">
 
-# 概况
+# 简历
 
 Linux/EMS 软件开发工程师,3 年经验。聚焦储能 EMS 系统与电力协议网关开发,技术栈以 C++/Linux/Qt 为核心,覆盖从嵌入式固件到 Linux 应用开发的全链路工程实践。
 
-<span style="white-space: nowrap;">邮箱:<a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">点击获取</a></span> ｜ <span style="white-space: nowrap;">项目:<a href="/zh-cn/projects/" class="profile-contact-link">项目</a></span> ｜ <span style="white-space: nowrap;">博客:<a href="/zh-cn/blog/" class="profile-contact-link">博客</a></span> ｜ <span style="white-space: nowrap;">GitHub:<a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
+<span style="white-space: nowrap;">邮箱:<a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">点击获取</a></span> ｜ <span style="white-space: nowrap;">项目:<a href="/zh-cn/projects/" class="profile-contact-link">项目</a></span> ｜ <span style="white-space: nowrap;">博客:<a href="/zh-cn/blog/categories/" class="profile-contact-link">博客</a></span> ｜ <span style="white-space: nowrap;">GitHub:<a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
 <script>
   (function() {
       if (typeof window._hw !== 'undefined') return;

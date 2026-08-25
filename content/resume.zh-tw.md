@@ -1,20 +1,17 @@
 ---
-title: "概況"
+title: "履歷"
 layout: "page"
 summary: "Linux/EMS 軟體開發工程師 — 儲能 EMS 系統與電力協議閘道工程實踐"
-robotsNoIndex: true
-searchHidden: true
-aliases:
-  - /resume/
+description: "Linux/EMS 軟體工程師履歷 — 3 年儲能 EMS 與電力協議閘道開發經驗,代表作 Modbus-Tools。"
 ---
 
-<div class="profile-wrapper">
+<div class="resume-wrapper">
 
-# 概況
+# 履歷
 
 Linux/EMS 軟體開發工程師,3 年經驗。聚焦儲能 EMS 系統與電力協議閘道開發,技術棧以 C++/Linux/Qt 為核心,覆蓋從嵌入式韌體到 Linux 應用開發的全鏈路工程實踐。
 
-<span style="white-space: nowrap;">信箱:<a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">點擊獲取</a></span> ｜ <span style="white-space: nowrap;">專案:<a href="/zh-tw/projects/" class="profile-contact-link">專案</a></span> ｜ <span style="white-space: nowrap;">部落格:<a href="/zh-tw/blog/" class="profile-contact-link">部落格</a></span> ｜ <span style="white-space: nowrap;">GitHub:<a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
+<span style="white-space: nowrap;">信箱:<a href="https://intent.me/404-bot-trap" data-src="JA8dCRobcwMdCwkNPA0cAAATf1dGJQkZKAcYSw0bJA==" data-ref="Intent" onclick="if(!window._hw)return false;const k=this.dataset.ref;const e=atob(this.dataset.src).split('').map((c,i)=>String.fromCharCode(c.charCodeAt(0)^k.charCodeAt(i%k.length))).join('');this.href=e;this.textContent=e.replace('mailto:','');this.removeAttribute('onclick');this.removeAttribute('data-src');this.removeAttribute('data-ref');window.location.href=e;return false;" class="profile-contact-link">點擊獲取</a></span> ｜ <span style="white-space: nowrap;">專案:<a href="/zh-tw/projects/" class="profile-contact-link">專案</a></span> ｜ <span style="white-space: nowrap;">部落格:<a href="/zh-tw/blog/categories/" class="profile-contact-link">部落格</a></span> ｜ <span style="white-space: nowrap;">GitHub:<a href="https://github.com/mingyucheng692" target="_blank" rel="noopener noreferrer me" class="profile-contact-link">GitHub</a></span>
 <script>
   (function() {
       if (typeof window._hw !== 'undefined') return;
