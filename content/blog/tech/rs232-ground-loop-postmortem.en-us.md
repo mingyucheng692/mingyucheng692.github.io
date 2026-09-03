@@ -38,7 +38,7 @@ Anomalies surfaced one by one during troubleshooting:
 
 ## Key Evidence: Counter Observation on the Linux Side
 
-The IPC is reachable over SSH — no blind guessing needed. The kernel serial driver ships free observation points.
+The IPC is reachable over SSH — no blind guessing needed. The kernel serial driver ships ready-made observation points.
 
 **1. Console binding:**
 
@@ -171,7 +171,7 @@ while true; do echo "1234567890" > /dev/ttyS2; sleep 1; done
 HELLO_PC
 ```
 
-Bidirectional plaintext restored, fe counter flat. With the dual-isolation converter, the plugged-in scenario is equally stable — closed loop.
+Bidirectional plaintext restored, fe counter flat. With the dual-isolation converter, the plugged-in scenario is equally stable — and the occasional first-byte loss seen during the fault is gone too. Closed loop.
 
 ## Key Takeaways
 
@@ -181,7 +181,7 @@ Bidirectional plaintext restored, fe counter flat. With the dual-isolation conve
 
 - Don't let plausible explanations bury anomalies: single-signal-wire garbling was dismissed as "floating noise"; only garbling with GND alone — a wire that carries no signal — broke the misread
 
-- The tx/rx/fe counters in `/proc/tty/driver/serial` are a free kernel-level observation point: rx growth proves physical delivery, flat fe proves frame integrity — more reliable than any serial terminal
+- The tx/rx/fe counters in `/proc/tty/driver/serial` are a zero-cost kernel-level observation point: rx growth proves physical delivery, flat fe proves frame integrity — more reliable than any serial terminal
 
 - On heterogeneous SoCs (A53 + R5F), UARTs sit in different power domains; matching `dmesg` MMIO addresses against the datasheet locates ownership — MCU-domain UARTs are off-limits from Linux
 
@@ -189,7 +189,7 @@ Bidirectional plaintext restored, fe counter flat. With the dual-isolation conve
 
 - Floating-ground systems are extremely sensitive to human capacitive coupling: touch metal → garble is the hallmark of a high-impedance floating ground
 
-- First-byte loss (`HELLO_PC` → `ELLO_PC`) is UART start-bit sync jitter; it recovers with continuous traffic and is not a fault
+- First-byte loss (`HELLO_PC` → `ELLO_PC`) was dismissed during the fault as "start-bit sync jitter, not a real issue" — it vanished completely after switching to the isolation converter, revealing it as residual common-mode interference disturbing start-bit sampling. Even self-healing, harmless-looking anomalies can be mild symptoms of the root cause; only a controlled retest after the fix settles the diagnosis
 
 - Measure the ground potential difference (AC) before equipotential bonding; tens of volts means abandon common ground — emergency-only, board-frying risk
 
