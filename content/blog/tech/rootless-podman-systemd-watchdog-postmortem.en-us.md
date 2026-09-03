@@ -2,7 +2,7 @@
 title: "Rootless Podman + Systemd Supervision Failure Postmortem: Diagnosing and Repairing a Broken Recovery Path"
 date: 2026-04-03T20:00:00+08:00
 draft: false
-tags: ["Podman", "Systemd", "Rootless", "Container", "Nginx", "Redis", "Go", "Postmortem", "SRE"]
+tags: ["Podman", "Systemd", "Rootless", "Nginx", "Redis", "Go", "Postmortem", "SRE"]
 categories: ["backend-infra"]
 summary: "A postmortem on a failed recovery path under Rootless Podman + Systemd user units, covering confirmed contributing factors, concrete remediation work, validation steps, and remaining risks."
 url: "/en-us/blog/tech/rootless-podman-systemd-watchdog-postmortem/"

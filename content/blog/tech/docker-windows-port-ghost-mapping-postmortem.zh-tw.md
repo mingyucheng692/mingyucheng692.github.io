@@ -2,7 +2,7 @@
 title: "Windows Docker 連接埠幽靈映射排查：EMQX 1883 被 WinNAT 靜默保留的覆盤"
 date: 2026-08-25T12:00:00+08:00
 draft: false
-tags: ["Docker", "Windows", "WinNAT", "Hyper-V", "EMQX", "MQTT", "Postmortem"]
+tags: ["Docker", "Windows", "EMQX", "MQTT", "Postmortem"]
 categories: ["backend-infra"]
 summary: "Windows 開發機 Docker Desktop 完整服務棧（backend + EMQX 5.8.9 + TimescaleDB + Valkey），後端 ping/pong 正常但 mosquitto_pub 持續 Connection refused。docker ps 中同棧其他連接埠正常映射，唯獨 1883 缺 0.0.0.0:1883-> 前綴且不報錯，根因為 Hyper-V/WinNAT 動態連接埠保留圈佔 1883（落在 1802–1901 區間）。給出換連接埠/臨時奪回/白名單/修正動態連接埠範圍四級修復方案。"
 url: "/zh-tw/blog/tech/docker-windows-port-ghost-mapping-postmortem/"

@@ -2,7 +2,7 @@
 title: "TrafficMonitor CPU 占用优化复盘：从 4% 降到 0.6% 的工程化收缩"
 date: 2026-04-26T10:00:00+08:00
 draft: false
-tags: ["TrafficMonitor", "Qt", "C++", "Modbus", "Performance", "CPU", "Postmortem"]
+tags: ["Qt", "C++", "Modbus", "Performance", "CPU", "Postmortem"]
 categories: ["industrial-software"]
 summary: "记录一次高频轮询场景下的 CPU 优化复盘：通过收缩 UI 日志链路、删除高频状态机、改造线程等待模型，将进程 CPU 使用率从 3.6%~4.2% 降到 0.1%~0.6%。"
 url: "/zh-cn/blog/tech/trafficmonitor-cpu-optimization-postmortem/"

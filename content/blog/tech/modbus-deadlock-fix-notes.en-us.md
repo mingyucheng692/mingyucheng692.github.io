@@ -3,7 +3,7 @@ title: "Pitfall Log: Fixing Modbus Multithread Deadlocks"
 date: 2026-03-07T10:00:00+08:00
 draft: false
 weight: 1
-tags: ["Modbus", "Qt6", "C++", "Deadlock", "Multithreading", "Industrial Software"]
+tags: ["Modbus", "Qt", "C++", "Deadlock", "Multithreading", "Industrial"]
 categories: ["industrial-software"]
 summary: "A field note on shutdown deadlocks and timeout misjudgment in a Qt multithreaded Modbus workflow, with practical fixes."
 url: "/en-us/blog/tech/modbus-deadlock-fix-notes/"

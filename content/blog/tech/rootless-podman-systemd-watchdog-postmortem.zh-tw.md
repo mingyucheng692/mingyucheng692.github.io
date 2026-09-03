@@ -2,7 +2,7 @@
 title: "Rootless Podman + Systemd 託管失效復盤：一次恢復鏈路排查與修復紀錄"
 date: 2026-04-03T20:00:00+08:00
 draft: false
-tags: ["Podman", "Systemd", "Rootless", "Container", "Nginx", "Redis", "Go", "Postmortem", "SRE"]
+tags: ["Podman", "Systemd", "Rootless", "Nginx", "Redis", "Go", "Postmortem", "SRE"]
 categories: ["backend-infra"]
 summary: "一次 Rootless Podman + Systemd 使用者單元託管失效的復盤，梳理已確認的致因因素、實際修復動作、驗證方式與尚未覆蓋的風險。"
 url: "/zh-tw/blog/tech/rootless-podman-systemd-watchdog-postmortem/"

@@ -2,7 +2,7 @@
 title: "IIoT 接入链路排查与修复记录：Podman Rootless 下 EMQX 5.8 部署故障复盘"
 date: 2026-05-28T18:59:25+08:00
 draft: false
-tags: ["IIoT", "MQTT", "EMQX", "Podman", "Rootless", "Erlang", "HOCON", "Webhook", "CSRF", "Postmortem"]
+tags: ["IIoT", "MQTT", "EMQX", "Podman", "Rootless", "CSRF", "Postmortem"]
 categories: ["backend-infra"]
 summary: "记录一次 IIoT 接入链路部署故障的完整排查：在 Podman Rootless 环境下，EMQX 5.8 同时暴露出 Erlang IPC 失效、HOCON Schema 校验失败、安全组未放通和 M2M 请求被 CSRF 误拦截等问题，并给出最终修复方案与验证结果。"
 url: "/zh-cn/blog/tech/iiot-emqx-rootless-deployment-postmortem/"

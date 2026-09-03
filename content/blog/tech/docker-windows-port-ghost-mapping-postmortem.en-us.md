@@ -2,7 +2,7 @@
 title: "Windows Docker Ghost Port Mapping: EMQX 1883 Silently Reserved by WinNAT Postmortem"
 date: 2026-08-25T12:00:00+08:00
 draft: false
-tags: ["Docker", "Windows", "WinNAT", "Hyper-V", "EMQX", "MQTT", "Postmortem"]
+tags: ["Docker", "Windows", "EMQX", "MQTT", "Postmortem"]
 categories: ["backend-infra"]
 summary: "Docker Desktop on Windows with a full stack (backend + EMQX 5.8.9 + TimescaleDB + Valkey). Backend ping/pong works, but mosquitto_pub keeps returning Connection refused. Other ports in docker ps map fine; only 1883 lacks the 0.0.0.0:1883-> prefix and Docker reports no error. Root cause: Hyper-V/WinNAT dynamic port reservation holds 1883 (in the 1802–1901 range). Four remediation options: swap port, temporary reclaim, admin allowlist, fix the dynamic port range."
 url: "/en-us/blog/tech/docker-windows-port-ghost-mapping-postmortem/"

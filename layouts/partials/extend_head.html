@@ -11,3 +11,14 @@
     mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
 {{ end }}
+
+{{/* 标签白名单校验：未在 data/tags.yaml 注册的标签使构建失败 */}}
+{{- with .Params.tags }}
+    {{- range . }}
+        {{- if not (index site.Data.tags .) }}
+            {{- if eq (printf "%T" .) "string" }}
+                {{- errorf "未知标签 %q（文件 %s）— 请先在 data/tags.yaml 注册" . $.File.Path }}
+            {{- end }}
+        {{- end }}
+    {{- end }}
+{{- end }}

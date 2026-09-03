@@ -2,7 +2,7 @@
 title: "JWT 双票体系加固复盘：从无状态刷新到 Redis 可撤销会话"
 date: 2026-03-23T10:00:00+08:00
 draft: false
-tags: ["JWT", "Access Token", "Refresh Token", "Redis", "Go", "Gin", "Security", "Zero Trust", "Postmortem"]
+tags: ["JWT", "Redis", "Go", "Gin", "Security", "Zero Trust", "Postmortem"]
 categories: ["backend-infra"]
 summary: "一次针对 JWT AT/RT 架构的安全加固复盘：将 Redis 预留能力视为已落地，实现 RT 轮换、重放检测与会话可撤销。"
 url: "/zh-cn/blog/tech/jwt-at-rt-redis-hardening-postmortem/"

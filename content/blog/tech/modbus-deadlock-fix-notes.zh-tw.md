@@ -3,7 +3,7 @@ title: "踩坑日記：Modbus 多執行緒死鎖修復記錄"
 date: 2026-03-07T10:00:00+08:00
 draft: false
 weight: 1
-tags: ["Modbus", "Qt6", "C++", "Deadlock", "Multithreading", "Industrial Software"]
+tags: ["Modbus", "Qt", "C++", "Deadlock", "Multithreading", "Industrial"]
 categories: ["industrial-software"]
 summary: "記錄一次 Qt 多執行緒 Modbus 場景中的退出死鎖與超時誤判問題，以及對應的工程化修復方案。"
 url: "/zh-tw/blog/tech/modbus-deadlock-fix-notes/"

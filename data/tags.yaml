@@ -1,0 +1,51 @@
+# 标签白名单（Tag Vocabulary）
+# 所有文章 frontmatter 中的 tags 必须在此注册，否则构建失败。
+# 新增标签：先在此登记，再在文章中使用。
+# 规则：技术标签用官方/惯用拼写（Go 而非 Golang，Qt 而非 Qt6），
+#       版本细节写入正文；伞形词（Container 类）仅在无具体标签时使用。
+
+# --- 核心技术栈（职业方向：Linux C++ · EMS Storage · Protocol Gateway）---
+Linux: 核心方向 — 开发板/工控机/内核/驱动
+C++: 核心方向 - 语言与工程实践
+Qt: Qt 桌面应用（不区分版本，Qt6 等写入正文）
+Go: Go 语言（官方拼写，不用 Golang）
+Modbus: 工业协议
+MQTT: 消息协议
+EMQX: MQTT broker
+RS232: 串口电气标准
+Serial: 串口通信
+
+# --- 服务端与基础设施 ---
+Nginx: 反向代理
+Redis: 缓存与会话
+Gin: Go Web 框架
+Systemd: 服务管理
+Podman: 容器引擎
+Docker: 容器引擎
+Rootless: 无根容器/无根部署
+JWT: JSON Web Token 认证
+HTTP-FLV: HTTP-FLV 流媒体
+H.265: HEVC 视频编码
+HTTPS: TLS/证书
+
+# --- 质量属性与概念 ---
+Postmortem: 复盘类文章
+Performance: 性能优化
+CPU: CPU 占用/调度
+Security: 安全
+Zero Trust: 零信任架构
+SRE: 可靠性工程
+Multithreading: 多线程
+Deadlock: 死锁
+EMC: 电磁兼容
+Hardware: 硬件层
+NAT: 地址转换
+Networking: 网络
+CSRF: 跨站请求伪造
+CORS: 跨源资源共享
+Industrial: 工业场景
+IIoT: 工业物联网
+WASM: WebAssembly
+Python: Python
+JavaScript: JavaScript
+Windows: Windows 平台
