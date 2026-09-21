@@ -27,6 +27,8 @@ JWT: JSON Web Token 认证
 HTTP-FLV: HTTP-FLV 流媒体
 H.265: HEVC 视频编码
 HTTPS: TLS/证书
+CI/CD: 持续集成与持续交付
+
 
 # --- 质量属性与概念 ---
 Postmortem: 复盘类文章
