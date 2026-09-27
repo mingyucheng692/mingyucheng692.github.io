@@ -2,7 +2,7 @@
 title: "工控机 RS-232 持续乱码：软件全对、硬件正常，根因在地环路"
 date: 2026-09-02T12:00:00+08:00
 draft: false
-tags: ["RS232", "Serial", "Linux", "Hardware", "EMC", "Industrial", "Postmortem"]
+tags: ["RS-232", "Linux"]
 categories: ["embedded-linux"]
 summary: "工控机（TI AM64x 异构 SoC，A53 Linux + R5F RTOS，24V 供电）RS-232 三线串口持续乱码，115200 8N1 配置正确。经 SSH 用 /proc/tty/driver/serial 的 tx/rx/fe 计数器完成双向通道验证，排除软件与个体故障；拆至仅接 GND 仍乱码、拔掉笔记本电源适配器立即恢复——根因为 24V 工业电源与市电间的地环路。双隔离转换器已实测验证，插电笔记本无干扰。"
 url: "/zh-cn/blog/tech/rs232-ground-loop-postmortem/"

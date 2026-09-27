@@ -2,7 +2,7 @@
 title: "Linux 发布 CI/CD 多轮收敛复盘：“能跑”是表象，不是证据"
 date: 2026-09-18T12:00:00+08:00
 draft: false
-tags: ["C++", "Qt", "Linux", "Windows", "Industrial", "CI/CD", "Multithreading", "Postmortem"]
+tags: ["C++", "Qt", "Linux", "Windows", "CI/CD"]
 categories: ["industrial-software"]
 summary: "开源工业调试工具 Modbus-Tools（Qt 6 / C++）在建立 Linux 自动化发布管线时，通过多轮迭代收敛出七类跨平台深坑。其中六类共享同一模式：“在别处能跑”往往只是特定环境下的局部表象，而非逻辑正确。本文从 GNU ld 符号剔除、epoll/Winsock 事件时序、Qt 双 Socket 争抢 fd 的未定义行为，到 ELF RUNPATH 契约切分，复盘一个高确定性发布管线的建立过程。"
 url: "/zh-cn/blog/tech/linux-release-ci-postmortem/"

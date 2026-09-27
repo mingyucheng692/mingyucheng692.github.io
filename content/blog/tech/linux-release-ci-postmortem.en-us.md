@@ -2,7 +2,7 @@
 title: "Linux Release CI/CD Postmortem: \"It Runs\" Is an Appearance, Not Evidence"
 date: 2026-09-18T12:00:00+08:00
 draft: false
-tags: ["C++", "Qt", "Linux", "Windows", "Industrial", "CI/CD", "Multithreading", "Postmortem"]
+tags: ["C++", "Qt", "Linux", "Windows", "CI/CD"]
 categories: ["industrial-software"]
 summary: "How the first automated Linux release pipeline for Modbus-Tools (Qt 6 / C++) converged over multiple CI rounds. Six of the seven cross-platform failure classes share one pattern: \"it ran elsewhere\" is merely a localized surface phenomenon, not proof of correctness. From GNU ld member stripping and epoll/Winsock event ordering, through undefined behavior from two Qt socket engines fighting over one fd, to ELF RUNPATH contract splitting — building a deterministic release pipeline."
 url: "/en-us/blog/tech/linux-release-ci-postmortem/"

@@ -2,7 +2,7 @@
 title: "Industrial PC RS-232 Garbled Data: Software Correct, Hardware Fine — Ground Loop Postmortem"
 date: 2026-09-02T12:00:00+08:00
 draft: false
-tags: ["RS232", "Serial", "Linux", "Hardware", "EMC", "Industrial", "Postmortem"]
+tags: ["RS-232", "Linux"]
 categories: ["embedded-linux"]
 summary: "An industrial PC (TI AM64x heterogeneous SoC, A53 Linux + R5F RTOS, 24V supply) garbles continuously on a 3-wire RS-232 port at correct 115200 8N1 settings. Via SSH, the tx/rx/fe counters in /proc/tty/driver/serial verified both directions of the channel, ruling out software and unit defects; garbling persisted with only GND connected and vanished the moment the laptop's power adapter was unplugged — a ground loop between the 24V industrial supply and mains. Dual-isolation converter verified in practice: no interference with the laptop plugged in."
 url: "/en-us/blog/tech/rs232-ground-loop-postmortem/"

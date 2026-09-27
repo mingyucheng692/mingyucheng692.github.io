@@ -2,7 +2,7 @@
 title: "工控機 RS-232 持續亂碼：軟體全對、硬體正常，根因在接地迴路"
 date: 2026-09-02T12:00:00+08:00
 draft: false
-tags: ["RS232", "Serial", "Linux", "Hardware", "EMC", "Industrial", "Postmortem"]
+tags: ["RS-232", "Linux"]
 categories: ["embedded-linux"]
 summary: "工控機（TI AM64x 異構 SoC，A53 Linux + R5F RTOS，24V 供電）RS-232 三線序列埠持續亂碼，115200 8N1 配置正確。經 SSH 以 /proc/tty/driver/serial 的 tx/rx/fe 計數器完成雙向通道驗證，排除軟體與個體故障；拆至僅接 GND 仍亂碼、拔掉筆電電源變壓器立即恢復——根因為 24V 工業電源與市電間的接地迴路。雙隔離轉接器已實測驗證，筆電插電無干擾。"
 url: "/zh-tw/blog/tech/rs232-ground-loop-postmortem/"
