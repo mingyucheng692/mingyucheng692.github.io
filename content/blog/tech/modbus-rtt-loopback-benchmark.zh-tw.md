@@ -1,7 +1,7 @@
 ---
 title: "Modbus 時延抖動 30–80ms：閘道實測僅 1–4ms，根因在測試台架"
 date: 2026-09-21T12:00:00+08:00
-draft: true
+draft: false
 tags: ["Modbus", "RS-485", "Linux", "Performance", "Windows"]
 categories: ["embedded-linux"]
 summary: "工業閘道（TI AM64x，Linux PREEMPT_RT）對 Windows 模擬器實測 Modbus-TCP RTT 30–60ms、RTU 50–80ms 抖動。經量測口徑修正與三步正交隔離環回（localhost → 雙網卡 netns 直連 → 雙 RS-485 對接），在本次測試條件下抖動歸因於測試對端：板端純軟體棧 0.69ms、實體網卡 1.02ms、串口 4.15ms（線傳佔比約七成）；對端側經 FTDI Latency Timer 等變數干預鎖定 Windows 台架實測下界 45–50ms，據此給出超時閾值參考基線；閘道側單一事務佔端到端鏈路預算約 1%–15%，不構成阻滯項。"

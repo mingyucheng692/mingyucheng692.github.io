@@ -1,7 +1,7 @@
 ---
 title: "Modbus RTT Jitter at 30–80 ms: Gateway Measured 1–4 ms — the Root Cause Was the Test Bench"
 date: 2026-09-21T12:00:00+08:00
-draft: true
+draft: false
 tags: ["Modbus", "RS-485", "Linux", "Performance", "Windows"]
 categories: ["embedded-linux"]
 summary: "An industrial gateway (TI AM64x, Linux PREEMPT_RT) measured 30–60 ms Modbus-TCP RTT and 50–80 ms RTU jitter against a Windows simulator. After correcting the measurement semantics and running a three-step orthogonal isolation loopback (localhost → dual-NIC netns direct link → dual RS-485 crossover), the jitter is attributed to the test peer under these test conditions: board-side pure software stack 0.69 ms, physical NIC 1.02 ms, serial 4.15 ms (wire time about 70%); peer-side interventions such as the FTDI Latency Timer pinned the Windows bench's measured lower bound at 45–50 ms, from which a reference timeout baseline is derived; a single gateway transaction consumes roughly 1%–15% of the end-to-end link budget — not a blocker."
